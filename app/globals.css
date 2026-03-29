@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #3B82F6;
+  --color-primary-dark: #2563EB;
+  --color-bg: #FFFFFF;
+  --color-bg-subtle: #F9FAFB;
+  --color-text: #111827;
+  --color-text-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-bg: var(--color-bg);
+  --color-bg-subtle: var(--color-bg-subtle);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+}
+
+[data-theme="dark"] {
+  --color-primary: #60A5FA;
+  --color-primary-dark: #3B82F6;
+  --color-bg: #111827;
+  --color-bg-subtle: #1F2937;
+  --color-text: #F9FAFB;
+  --color-text-muted: #9CA3AF;
+  --color-border: #374151;
+  --color-success: #34D399;
+  --color-warning: #FCD34D;
+  --color-error: #F87171;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.tool-card:hover h2 {
+  color: var(--color-primary);
+}
