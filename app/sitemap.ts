@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { ALL_TYPES } from "@/lib/personality";
 
-const BASE_URL = "https://dailypicklab.vercel.app";
+const BASE_URL = "https://www.dailypicklab.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [

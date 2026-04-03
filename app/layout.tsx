@@ -12,7 +12,7 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dailypicklab.vercel.app"),
+  metadataBase: new URL("https://www.dailypicklab.com"),
   title: {
     template: "%s | Daily Pick Lab",
     default: "Daily Pick Lab — 매일 쓰는 무료 도구 모음",
