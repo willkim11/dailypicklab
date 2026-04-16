@@ -51,9 +51,9 @@ const GAME_COUNT_OPTIONS = [1, 5, 10];
 
 // 지난 회차 당첨번호 (수동 업데이트)
 const RECENT_RESULTS = [
-  { round: 1172, date: "2025-03-22", numbers: [3, 14, 18, 25, 31, 40], bonus: 7 },
-  { round: 1171, date: "2025-03-15", numbers: [5, 11, 22, 27, 33, 42], bonus: 19 },
-  { round: 1170, date: "2025-03-08", numbers: [2, 8, 17, 24, 36, 44], bonus: 12 },
+  { round: 1219, date: "2026-04-11", numbers: [1, 2, 15, 28, 39, 45], bonus: 31 },
+  { round: 1218, date: "2026-04-04", numbers: [3, 28, 31, 32, 42, 45], bonus: 25 },
+  { round: 1217, date: "2026-03-28", numbers: [8, 10, 15, 20, 29, 31], bonus: 41 },
 ];
 
 export default function LottoClient() {
