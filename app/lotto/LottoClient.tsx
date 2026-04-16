@@ -200,6 +200,70 @@ export default function LottoClient() {
             당첨번호는 매주 토요일 오후 8시 45분 MBC에서 생중계됩니다. 이 페이지의 최근 당첨번호는
             수동으로 업데이트됩니다.
           </p>
+
+          {/* 등수별 당첨 조건 표 */}
+          <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+            로또 등수별 당첨 조건과 확률
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr style={{ backgroundColor: "var(--color-bg-subtle)" }}>
+                  <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>등수</th>
+                  <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>당첨 조건</th>
+                  <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>당첨 확률</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { rank: "1등", cond: "6개 번호 일치", prob: "1/8,145,060 (약 814만분의 1)" },
+                  { rank: "2등", cond: "5개 + 보너스 번호 일치", prob: "1/1,357,510" },
+                  { rank: "3등", cond: "5개 번호 일치", prob: "1/35,724" },
+                  { rank: "4등", cond: "4개 번호 일치", prob: "1/733 (5만원 고정)" },
+                  { rank: "5등", cond: "3개 번호 일치", prob: "1/45 (5천원 고정)" },
+                ].map((row) => (
+                  <tr key={row.rank}>
+                    <td className="px-3 py-2 border font-medium" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>{row.rank}</td>
+                    <td className="px-3 py-2 border" style={{ borderColor: "var(--color-border)" }}>{row.cond}</td>
+                    <td className="px-3 py-2 border" style={{ borderColor: "var(--color-border)" }}>{row.prob}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* 번호 선택 방법 */}
+          <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+            번호 선택 방법 비교
+          </h3>
+          <p>
+            로또 번호를 선택하는 방법은 크게 <strong style={{ color: "var(--color-text)" }}>자동(QR)</strong>과 <strong style={{ color: "var(--color-text)" }}>수동(직접 선택)</strong>으로 나뉩니다.
+            통계적으로 두 방법의 당첨 확률은 동일합니다. 각 회차는 완전히 독립된 시행이므로 '자주 나오는 번호'도 다음 회차 확률에 영향을 주지 않습니다.
+          </p>
+          <p className="mt-3">
+            생일, 기념일 등 의미 있는 날짜를 번호로 사용하면 1~31 범위에 번호가 집중됩니다.
+            만약 당첨된다면 같은 번호를 선택한 사람이 많아 1등 당첨금이 분산될 수 있습니다.
+            이 무작위 추첨기는 1~45 범위에서 균등하게 번호를 선택해 이 편향을 피할 수 있습니다.
+          </p>
+
+          {/* FAQ */}
+          <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+            자주 묻는 질문
+          </h3>
+          <div className="space-y-4">
+            {[
+              { q: "로또는 몇 살부터 구매할 수 있나요?", a: "만 19세 이상 성인만 구매할 수 있습니다. 미성년자는 복권 구매가 법적으로 금지되어 있습니다." },
+              { q: "당첨금에 세금이 붙나요?", a: "5만원 이하(5등)는 비과세입니다. 200만원 이하는 22% 원천징수, 200만원 초과는 33% 원천징수됩니다. 1등처럼 고액 당첨 시에는 종합소득세 신고도 필요할 수 있습니다." },
+              { q: "당첨금 수령 기간은 얼마나 되나요?", a: "당첨일로부터 1년 이내에 수령해야 합니다. 기간이 지나면 당첨금은 복권기금으로 귀속됩니다. 반드시 당첨 복권을 잘 보관하세요." },
+              { q: "온라인으로도 로또를 살 수 있나요?", a: "동행복권 홈페이지 또는 앱에서 회원 가입 후 구매할 수 있습니다. 1인당 1주일에 최대 5만원까지 구매 가능합니다." },
+              { q: "이 추첨기는 실제 당첨번호와 관계가 있나요?", a: "아닙니다. 이 추첨기는 오직 재미를 위한 시뮬레이터입니다. 생성된 번호는 실제 추첨 결과와 완전히 무관하며, 당첨을 보장하지 않습니다." },
+            ].map((item) => (
+              <div key={item.q} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)" }}>
+                <p className="font-semibold" style={{ color: "var(--color-text)" }}>Q. {item.q}</p>
+                <p className="mt-2 text-sm leading-relaxed">A. {item.a}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         <OtherToolsNav currentHref="/lotto" />

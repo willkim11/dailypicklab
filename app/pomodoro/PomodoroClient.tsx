@@ -253,13 +253,76 @@ export default function PomodoroClient() {
           뽀모도로 기법이란?
         </h2>
         <p>
-          뽀모도로(Pomodoro) 기법은 1980년대 프란체스코 치릴로가 개발한 시간 관리 방법입니다.
-          25분 집중 후 5분 휴식을 1사이클로 하며, 4사이클 후 15~30분의 긴 휴식을 갖습니다.
+          뽀모도로(Pomodoro) 기법은 1980년대 이탈리아의 프란체스코 치릴로(Francesco Cirillo)가 대학생 시절 개발한 시간 관리 방법입니다.
+          당시 그가 사용한 토마토 모양 주방 타이머(이탈리아어로 '뽀모도로')에서 이름을 따왔습니다.
+          25분 집중 후 5분 휴식을 1 뽀모도로(사이클)로 하며, 4사이클 후 15~30분의 긴 휴식을 갖습니다.
         </p>
         <p className="mt-3">
-          짧은 집중 단위를 반복하면 번아웃 없이 오래 집중할 수 있습니다.
-          휴식 중에는 스트레칭이나 물 마시기 같은 가벼운 활동을 추천합니다.
+          인간의 집중력은 연속으로 지속하기 어렵습니다. 짧은 집중 단위를 반복하면 번아웃 없이 오래 집중할 수 있고,
+          타이머 소리가 주는 마감 압박감이 집중력을 높이는 데 도움을 줍니다.
         </p>
+
+        {/* 단계별 사용법 */}
+        <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+          뽀모도로 기법 단계별 사용법
+        </h3>
+        <div className="space-y-3">
+          {[
+            { step: "1", title: "할 일 목록 작성", desc: "오늘 해야 할 작업을 구체적으로 적어두세요. 큰 작업은 여러 뽀모도로로 나누고, 작은 작업들은 묶어서 처리합니다." },
+            { step: "2", title: "25분 타이머 시작", desc: "스마트폰, SNS, 이메일 알림을 모두 끄세요. 이 25분 동안은 오직 하나의 작업에만 집중합니다. 방해 요소가 생기면 메모만 해두고 나중에 처리합니다." },
+            { step: "3", title: "5분 짧은 휴식", desc: "타이머가 울리면 반드시 자리에서 일어나세요. 스트레칭, 물 마시기, 창밖 바라보기 등 화면에서 눈을 떼는 활동을 권장합니다. 스마트폰 사용은 피하세요." },
+            { step: "4", title: "4사이클 후 긴 휴식", desc: "4번의 뽀모도로를 완료하면 15~30분의 긴 휴식을 취하세요. 산책, 간식 등 완전히 다른 활동으로 두뇌를 리셋합니다." },
+          ].map((item) => (
+            <div key={item.step} className="flex gap-4 p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+              <span
+                className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
+                style={{ backgroundColor: "var(--color-primary)", color: "white" }}
+              >
+                {item.step}
+              </span>
+              <div>
+                <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.title}</p>
+                <p className="text-sm mt-1">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 효과 */}
+        <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+          뽀모도로 기법의 효과
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            { icon: "🎯", title: "집중력 향상", desc: "명확한 시간 제한이 '파킨슨 법칙(일은 주어진 시간을 가득 채운다)'을 방지합니다." },
+            { icon: "🧠", title: "피로 감소", desc: "규칙적인 휴식으로 정신적 피로를 최소화하며 하루 종일 생산성을 유지할 수 있습니다." },
+            { icon: "📊", title: "시간 파악", desc: "작업이 얼마나 걸리는지 뽀모도로 단위로 파악할 수 있어 일정 계획이 정확해집니다." },
+            { icon: "✅", title: "성취감 증가", desc: "25분마다 한 사이클 완료라는 작은 성공이 쌓이며 동기부여가 유지됩니다." },
+          ].map((item) => (
+            <div key={item.title} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)" }}>
+              <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.icon} {item.title}</p>
+              <p className="text-sm mt-1">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* FAQ */}
+        <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+          자주 묻는 질문
+        </h3>
+        <div className="space-y-4">
+          {[
+            { q: "25분이 너무 짧게 느껴져요. 더 늘려도 되나요?", a: "네. 뽀모도로 기법의 핵심은 집중과 휴식의 리듬이지, 반드시 25분일 필요는 없습니다. 처음에는 25분으로 시작하고 익숙해지면 50분/10분 비율도 많이 사용됩니다. 자신에게 맞는 주기를 찾는 것이 중요합니다." },
+            { q: "중간에 방해를 받으면 어떻게 하나요?", a: "긴급한 방해라면 뽀모도로를 취소하고 처음부터 다시 시작하세요. 나중에 처리해도 되는 방해라면 빠르게 메모하고 집중을 유지하세요. 취소된 뽀모도로는 집중 시간으로 카운트하지 않습니다." },
+            { q: "휴식 시간에 스마트폰을 봐도 되나요?", a: "권장하지 않습니다. 스마트폰 사용은 뇌를 쉬게 하지 않습니다. 오히려 시각적·인지적 자극이 계속되어 다음 집중 시간에 악영향을 줄 수 있습니다. 진짜 휴식은 화면에서 눈을 떼는 것입니다." },
+            { q: "공부와 업무 중 어디에 더 효과적인가요?", a: "둘 다 효과적이지만, 특히 단일 작업에 긴 집중이 필요한 코딩, 글쓰기, 독서, 시험 공부에 탁월합니다. 반면 회의나 협업이 많은 업무 환경에서는 주변 동의가 필요할 수 있습니다." },
+          ].map((item) => (
+            <div key={item.q} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)" }}>
+              <p className="font-semibold" style={{ color: "var(--color-text)" }}>Q. {item.q}</p>
+              <p className="mt-2 text-sm leading-relaxed">A. {item.a}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <OtherToolsNav currentHref="/pomodoro" />

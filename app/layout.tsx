@@ -40,6 +40,19 @@ export const metadata: Metadata = {
   },
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Daily Pick Lab",
+  url: "https://www.dailypicklab.com",
+  description: "로또 번호 추첨기, 성격 유형 테스트, 반응속도 테스트, 뽀모도로 타이머, 비밀번호 생성기 — 매일 쓰는 무료 온라인 도구 모음",
+  inLanguage: "ko",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://www.dailypicklab.com/guides",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -48,6 +61,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${notoSansKR.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col" style={{ fontFamily: "var(--font-noto-sans-kr), sans-serif" }}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2678965337292925"

@@ -10,6 +10,7 @@ const tools = [
   { href: "/reaction", label: "반응속도 테스트" },
   { href: "/pomodoro", label: "뽀모도로" },
   { href: "/password", label: "비밀번호 생성기" },
+  { href: "/guides", label: "가이드" },
 ];
 
 function SunIcon() {
