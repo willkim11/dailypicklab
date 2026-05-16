@@ -47,6 +47,8 @@ function LottoBallComponent({ number, isBonus = false, animDelay = 0 }: LottoBal
 }
 
 const GAME_COUNT_OPTIONS = [1, 5, 10];
+const INITIAL_RECENT_RESULT_COUNT = 3;
+const RECENT_RESULTS_PAGE_SIZE = 5;
 
 // 지난 회차 당첨번호 (수동 업데이트)
 const RECENT_RESULTS = [
@@ -63,6 +65,16 @@ export default function LottoClient() {
   const [gameCount, setGameCount] = useState(1);
   const [results, setResults] = useState<GameResult[]>([]);
   const [animKey, setAnimKey] = useState(0);
+  const [showAllRecentResults, setShowAllRecentResults] = useState(false);
+  const [recentResultsPage, setRecentResultsPage] = useState(0);
+
+  const totalRecentResultPages = Math.ceil(RECENT_RESULTS.length / RECENT_RESULTS_PAGE_SIZE);
+  const visibleRecentResults = showAllRecentResults
+    ? RECENT_RESULTS.slice(
+        recentResultsPage * RECENT_RESULTS_PAGE_SIZE,
+        (recentResultsPage + 1) * RECENT_RESULTS_PAGE_SIZE,
+      )
+    : RECENT_RESULTS.slice(0, INITIAL_RECENT_RESULT_COUNT);
 
   function handleDraw() {
     const newResults = Array.from({ length: gameCount }, () => {
@@ -152,7 +164,7 @@ export default function LottoClient() {
             최근 당첨번호
           </h2>
           <div className="space-y-3">
-            {RECENT_RESULTS.map((r) => (
+            {visibleRecentResults.map((r) => (
               <div
                 key={r.round}
                 className="p-4 rounded-xl border"
@@ -173,6 +185,59 @@ export default function LottoClient() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            {RECENT_RESULTS.length > INITIAL_RECENT_RESULT_COUNT && (
+              <button
+                type="button"
+                onClick={() => {
+                  setShowAllRecentResults((current) => !current);
+                  setRecentResultsPage(0);
+                }}
+                className="px-4 py-2 rounded-lg text-sm font-medium border transition-colors"
+                style={{
+                  borderColor: "var(--color-border)",
+                  backgroundColor: "var(--color-bg)",
+                  color: "var(--color-text)",
+                }}
+              >
+                {showAllRecentResults ? "접기" : "더보기"}
+              </button>
+            )}
+
+            {showAllRecentResults && totalRecentResultPages > 1 && (
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setRecentResultsPage((page) => Math.max(0, page - 1))}
+                  disabled={recentResultsPage === 0}
+                  className="px-3 py-2 rounded-lg text-sm font-medium border transition-colors disabled:opacity-40"
+                  style={{
+                    borderColor: "var(--color-border)",
+                    backgroundColor: "var(--color-bg)",
+                    color: "var(--color-text)",
+                  }}
+                >
+                  이전
+                </button>
+                <span className="text-sm" style={{ color: "var(--color-text-muted)" }}>
+                  {recentResultsPage + 1} / {totalRecentResultPages}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setRecentResultsPage((page) => Math.min(totalRecentResultPages - 1, page + 1))}
+                  disabled={recentResultsPage >= totalRecentResultPages - 1}
+                  className="px-3 py-2 rounded-lg text-sm font-medium border transition-colors disabled:opacity-40"
+                  style={{
+                    borderColor: "var(--color-border)",
+                    backgroundColor: "var(--color-bg)",
+                    color: "var(--color-text)",
+                  }}
+                >
+                  다음
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
