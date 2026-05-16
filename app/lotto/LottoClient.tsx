@@ -28,7 +28,6 @@ interface LottoBall {
 
 interface GameResult {
   numbers: number[];
-  bonus: number;
 }
 
 function LottoBallComponent({ number, isBonus = false, animDelay = 0 }: LottoBall & { animDelay?: number }) {
@@ -51,6 +50,10 @@ const GAME_COUNT_OPTIONS = [1, 5, 10];
 
 // 지난 회차 당첨번호 (수동 업데이트)
 const RECENT_RESULTS = [
+  { round: 1223, date: "2026-05-09", numbers: [16, 18, 20, 32, 33, 39], bonus: 26 },
+  { round: 1222, date: "2026-05-02", numbers: [4, 11, 17, 22, 32, 41], bonus: 34 },
+  { round: 1221, date: "2026-04-25", numbers: [6, 13, 18, 28, 30, 36], bonus: 9 },
+  { round: 1220, date: "2026-04-18", numbers: [2, 22, 25, 28, 34, 43], bonus: 16 },
   { round: 1219, date: "2026-04-11", numbers: [1, 2, 15, 28, 39, 45], bonus: 31 },
   { round: 1218, date: "2026-04-04", numbers: [3, 28, 31, 32, 42, 45], bonus: 25 },
   { round: 1217, date: "2026-03-28", numbers: [8, 10, 15, 20, 29, 31], bonus: 41 },
@@ -63,14 +66,7 @@ export default function LottoClient() {
 
   function handleDraw() {
     const newResults = Array.from({ length: gameCount }, () => {
-      const all = Array.from({ length: 45 }, (_, i) => i + 1);
-      for (let i = all.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [all[i], all[j]] = [all[j], all[i]];
-      }
-      const numbers = all.slice(0, 6).sort((a, b) => a - b);
-      const bonus = all[6];
-      return { numbers, bonus };
+      return { numbers: pickNumbers() };
     });
     setResults(newResults);
     setAnimKey((k) => k + 1);
@@ -143,9 +139,6 @@ export default function LottoClient() {
                     {game.numbers.map((n, j) => (
                       <LottoBallComponent key={n} number={n} animDelay={j * 150} />
                     ))}
-                    <span className="text-sm mx-1" style={{ color: "var(--color-text-muted)" }}>+</span>
-                    <LottoBallComponent number={game.bonus} isBonus animDelay={6 * 150} />
-                    <span className="text-xs ml-1" style={{ color: "var(--color-text-muted)" }}>보너스</span>
                   </div>
                 </div>
               ))}
