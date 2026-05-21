@@ -4,9 +4,9 @@ import PersonalityClient from "./PersonalityClient";
 import { ALL_TYPES, TYPE_INFO } from "@/lib/personality";
 
 export const metadata: Metadata = {
-  title: "성격 유형 테스트 — 무료 MBTI 심리 테스트 온라인",
+  title: "성격 유형 테스트 — 16가지 유형 해석과 활용 가이드",
   description:
-    "무료 성격 유형 테스트. 16가지 성격 유형 중 나는 어떤 유형인지 알아보세요. MBTI 기반 자체 제작 문항.",
+    "무료 성격 유형 테스트로 16가지 유형 중 나의 경향을 확인하고, 4가지 성격 축의 의미와 결과 활용법을 함께 읽어보세요.",
   keywords: ["성격유형테스트", "MBTI", "MBTI테스트", "성격검사", "무료MBTI"],
 };
 
@@ -23,6 +23,28 @@ const FAQ = [
   { q: "16가지 유형이 있다는 게 정확한가요?", a: "4가지 이분법적 축의 조합으로 2×2×2×2 = 16가지 유형이 만들어집니다. 실제로는 연속적인 스펙트럼이지만, 유형으로 분류하면 이해하기 쉽고 자기 탐색에 유용합니다." },
   { q: "특정 유형이 더 우수한가요?", a: "아닙니다. 모든 유형은 동등하며 각자 고유한 강점을 가지고 있습니다. 어떤 유형이든 자신의 특성을 이해하고 활용하는 것이 중요합니다." },
   { q: "검사 결과를 어디에 활용할 수 있나요?", a: "자기 이해, 직업 선택 참고, 인간관계 이해, 팀 빌딩 등에 활용할 수 있습니다. 하지만 채용이나 중요한 결정의 유일한 기준으로 사용하는 것은 권장하지 않습니다." },
+];
+
+const USAGE_GUIDES = [
+  {
+    title: "평소의 나를 기준으로 답하기",
+    desc: "최근 하루의 기분보다 여러 상황에서 반복되는 선택 방식을 기준으로 고르세요. 애매하면 더 자주 나타나는 쪽을 선택하면 됩니다.",
+  },
+  {
+    title: "유형보다 축의 균형 보기",
+    desc: "ENTP, ISFJ처럼 네 글자 결과만 보는 것보다 E/I, S/N, T/F, J/P 중 어느 축에서 흔들리는지 보는 편이 더 실용적입니다.",
+  },
+  {
+    title: "중요한 결정의 단독 기준으로 쓰지 않기",
+    desc: "성격 유형은 자기 이해와 대화의 출발점입니다. 채용, 진로, 관계 판단을 한 번의 검사 결과만으로 결정하지 않는 것이 좋습니다.",
+  },
+];
+
+const RESULT_USE_CASES = [
+  "나에게 에너지가 쌓이는 환경과 소모되는 환경을 구분하기",
+  "갈등 상황에서 내가 논리, 감정, 속도 중 무엇을 먼저 보는지 점검하기",
+  "공부나 업무 루틴을 내 성향에 맞게 조정하기",
+  "다른 유형과 대화할 때 오해가 생기는 지점을 미리 이해하기",
 ];
 
 const faqJsonLd = {
@@ -67,8 +89,46 @@ export default function PersonalityPage() {
       <PersonalityClient />
 
       <div className="max-w-2xl mx-auto px-4 sm:px-6 pb-16">
-        {/* 16가지 유형 그리드 */}
         <section className="mt-4 border-t pt-12" style={{ borderColor: "var(--color-border)" }}>
+          <h2 className="text-xl font-semibold mb-2" style={{ color: "var(--color-text)" }}>
+            테스트를 더 정확하게 보는 방법
+          </h2>
+          <p className="text-sm mb-6 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+            이 테스트는 의학적·임상적 진단 도구가 아닙니다. 대신 내가 어떤 상황에서 에너지를 얻고,
+            정보를 어떻게 해석하며, 결정을 내릴 때 무엇을 우선하는지 정리하는 데 도움을 줍니다.
+          </p>
+          <div className="space-y-3">
+            {USAGE_GUIDES.map((guide) => (
+              <div
+                key={guide.title}
+                className="rounded-xl border p-5"
+                style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
+              >
+                <p className="font-semibold" style={{ color: "var(--color-text)" }}>{guide.title}</p>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>{guide.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12">
+          <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+            결과를 일상에서 활용하는 방법
+          </h2>
+          <div className="rounded-xl border p-5" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+            <ul className="space-y-3">
+              {RESULT_USE_CASES.map((item) => (
+                <li key={item} className="flex gap-3 text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+                  <span className="mt-0.5 font-bold" style={{ color: "var(--color-primary)" }}>→</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* 16가지 유형 그리드 */}
+        <section className="mt-12 border-t pt-12" style={{ borderColor: "var(--color-border)" }}>
           <h2 className="text-xl font-semibold mb-2" style={{ color: "var(--color-text)" }}>
             16가지 성격 유형 한눈에 보기
           </h2>

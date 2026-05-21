@@ -83,6 +83,23 @@ export default function PersonalityClient() {
           </button>
         )}
       </div>
+      <p className="mb-4 text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+        16개 문항으로 네 가지 성격 축의 경향을 확인합니다. 결과는 진단이 아니라 자기 이해를 돕는 참고 자료입니다.
+      </p>
+
+      {current === 0 && (
+        <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {["3~5분 소요", "기기 내 진행 저장", "채용 판단 금지"].map((item) => (
+            <div
+              key={item}
+              className="rounded-lg border px-4 py-3 text-sm whitespace-nowrap"
+              style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* 프로그레스 바 */}
       <div className="flex items-center gap-3 mb-8">
