@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "로또 번호 고르는 방법 완전 가이드",
+  title: "로또 번호 고르는 방법 — 확률, 오해, 책임 있는 이용 가이드",
   description:
-    "자동과 수동 중 어느 쪽이 유리할까? 로또 당첨 확률을 높이는 전략과 번호 선택의 심리학을 완전 분석합니다.",
+    "자동과 수동의 확률 차이, 자주 나오는 번호에 대한 오해, 번호 선택 편향과 책임 있는 복권 이용 기준을 정리했습니다.",
 };
 
 export default function LottoGuidePage() {
@@ -17,12 +17,16 @@ export default function LottoGuidePage() {
       </div>
 
       <h1 className="text-3xl font-bold mt-4" style={{ color: "var(--color-text)" }}>
-        로또 번호 고르는 방법 완전 가이드
+        로또 번호 고르는 방법: 확률과 오해 정리
       </h1>
       <p className="mt-3 text-lg leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
         매주 토요일 밤, 수백만 명이 기대를 품고 TV 앞에 앉습니다. 로또 1등 당첨 확률은 814만분의 1.
-        이 확률을 바꿀 수는 없지만, 번호를 어떻게 고르느냐에 따라 당첨금을 온전히 받을 가능성은 높일 수 있습니다.
+        이 확률을 바꿀 수는 없습니다. 그래서 번호 선택은 예측이 아니라 편향을 이해하고, 정해둔 예산 안에서 즐기는 방식으로 접근하는 것이 좋습니다.
       </p>
+      <div className="mt-5 rounded-xl border p-4 text-sm" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)", color: "var(--color-text-muted)" }}>
+        <p>최종 업데이트: 2026년 5월 21일</p>
+        <p className="mt-1">작성 기준: 로또 6/45 조합 수, 독립 시행 원리, 번호 선택 편향, 책임 있는 복권 이용 관점을 기준으로 정리했습니다.</p>
+      </div>
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
@@ -38,16 +42,16 @@ export default function LottoGuidePage() {
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
-          당첨금을 온전히 받는 번호 선택 전략
+          번호 선택에서 실제로 달라지는 것
         </h2>
         <p style={{ color: "var(--color-text-muted)" }}>
-          로또 1등은 전체 당첨금을 1등 당첨자 수로 나눠 지급합니다. 같은 번호를 선택한 사람이 적을수록 내 몫이 커집니다. 즉, "당첨 확률"은 바꿀 수 없지만 "기대 당첨금"은 전략으로 높일 수 있습니다.
+          로또 1등은 전체 당첨금을 1등 당첨자 수로 나눠 지급합니다. 같은 번호를 선택한 사람이 적을수록 당첨 시 나눠 받는 인원이 줄어들 수 있습니다. 다만 이것은 당첨 확률을 높인다는 뜻이 아닙니다.
         </p>
         <div className="mt-4 space-y-3">
           {[
-            { title: "32 이상의 번호 포함하기", desc: "사람들이 생일(1~31)을 많이 선택하기 때문에, 32~45 사이의 번호가 포함되면 같은 번호를 선택한 사람이 줄어 당첨금이 더 클 수 있습니다." },
-            { title: "연속 번호 피하기", desc: "1, 2, 3, 4, 5, 6 같은 연속 번호는 매 회차 수만 명이 선택합니다. 당첨되더라도 수만 명과 나눠야 하므로 실질적인 당첨금이 매우 적어집니다." },
-            { title: "무작위 선택 활용하기", desc: "이 페이지의 로또 번호 추첨기는 1~45 전 구간에서 균등하게 번호를 뽑습니다. 사람의 편향을 배제한 진짜 무작위 선택을 원한다면 적극 활용하세요." },
+            { title: "생일 번호 편향 줄이기", desc: "생일과 기념일을 쓰면 1~31에 번호가 몰리기 쉽습니다. 32~45 구간을 함께 고려하면 사람의 습관적 선택에서 조금 벗어날 수 있습니다." },
+            { title: "눈에 띄는 조합 이해하기", desc: "1, 2, 3, 4, 5, 6 같은 조합도 확률 자체는 같습니다. 다만 많은 사람이 고르는 조합이라면 당첨 시 분배 인원이 많을 가능성이 있습니다." },
+            { title: "무작위 선택 활용하기", desc: "무작위 추첨기는 1~45 전 구간에서 번호를 고릅니다. 특정 숫자에 의미를 부여하는 편향을 줄이고 싶을 때 사용할 수 있습니다." },
           ].map((item) => (
             <div key={item.title} className="flex gap-3 p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
               <span style={{ color: "var(--color-primary)" }} className="font-bold shrink-0">→</span>
@@ -74,6 +78,20 @@ export default function LottoGuidePage() {
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          1등 확률 1/8,145,060은 어떻게 나올까?
+        </h2>
+        <p style={{ color: "var(--color-text-muted)" }}>
+          로또 6/45는 45개의 번호 중 순서와 상관없이 6개를 고르는 조합입니다. 가능한 조합 수는
+          45C6, 즉 8,145,060가지입니다. 따라서 특정 한 조합이 1등이 될 확률은 1/8,145,060입니다.
+        </p>
+        <p className="mt-3" style={{ color: "var(--color-text-muted)" }}>
+          번호가 예쁘게 보이는지, 최근에 나왔는지, 오래 나오지 않았는지는 이 조합 수를 바꾸지 않습니다.
+          확률을 이해하면 “이번에는 꼭 나올 것 같다”는 감각과 실제 가능성을 분리해서 볼 수 있습니다.
+        </p>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
           로또를 즐기는 올바른 마음가짐
         </h2>
         <p style={{ color: "var(--color-text-muted)" }}>
@@ -82,6 +100,14 @@ export default function LottoGuidePage() {
         <p className="mt-3" style={{ color: "var(--color-text-muted)" }}>
           하지만 당첨을 확신하거나, 생활비를 투자하거나, "이번 주만큼은 반드시"라는 생각으로 구매한다면 그것은 문제가 됩니다. 로또는 수익을 기대할 수 있는 투자 수단이 아닙니다. 한 주에 1~2장 정도를 즐거움으로 구매하는 것이 바람직합니다.
         </p>
+        <div className="mt-4 rounded-xl border p-4" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+          <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>구매 전 체크</p>
+          <ul className="mt-3 space-y-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+            <li>정해둔 오락 예산 안에서만 구매하기</li>
+            <li>손실을 만회하기 위해 추가 구매하지 않기</li>
+            <li>당첨 예측, 유료 조합, 보장 광고를 조심하기</li>
+          </ul>
+        </div>
       </section>
 
       <div className="mt-12 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>

@@ -20,7 +20,7 @@ const faqJsonLd = {
     {
       "@type": "Question",
       name: "로또 당첨금에 세금이 붙나요?",
-      acceptedAnswer: { "@type": "Answer", text: "5만원 이하(5등)는 비과세입니다. 200만원 이하는 22% 원천징수, 200만원 초과는 33% 원천징수됩니다." },
+      acceptedAnswer: { "@type": "Answer", text: "복권 당첨금은 200만원 이하가 비과세 기준으로 안내됩니다. 200만원 초과 3억원 이하 구간은 22%, 3억원 초과분은 33% 원천징수 기준을 확인해야 합니다." },
     },
     {
       "@type": "Question",
