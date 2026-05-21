@@ -145,13 +145,13 @@ export default function PasswordClient() {
       </p>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
         {[
-          "crypto.getRandomValues 기반 난수",
-          "생성값 서버 전송 없음",
-          "비밀번호 관리자와 함께 사용 권장",
+          "보안 난수 생성",
+          "서버 전송 없음",
+          "관리자 앱 권장",
         ].map((item) => (
           <div
             key={item}
-            className="px-4 py-3 rounded-lg border text-sm"
+            className="px-4 py-3 rounded-lg border text-sm whitespace-nowrap"
             style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
           >
             {item}

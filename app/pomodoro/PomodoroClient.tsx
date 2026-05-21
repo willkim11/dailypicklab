@@ -151,13 +151,13 @@ export default function PomodoroClient() {
       </p>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
         {[
-          "설치 없이 브라우저에서 실행",
-          "집중/휴식 프리셋 제공",
-          "완료 알림과 탭 타이틀 표시",
+          "설치 없이 실행",
+          "프리셋 제공",
+          "알림/탭 표시",
         ].map((item) => (
           <div
             key={item}
-            className="px-4 py-3 rounded-lg border text-sm"
+            className="px-4 py-3 rounded-lg border text-sm whitespace-nowrap"
             style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
           >
             {item}

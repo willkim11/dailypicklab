@@ -119,13 +119,13 @@ export default function ReactionClient() {
       </p>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
         {[
-          "5회 평균으로 일시적 오차 완화",
-          "최고기록은 이 기기에만 저장",
-          "기기·브라우저에 따라 오차 발생",
+          "5회 평균 측정",
+          "기기 내 기록 저장",
+          "환경별 오차 안내",
         ].map((item) => (
           <div
             key={item}
-            className="px-4 py-3 rounded-lg border text-sm"
+            className="px-4 py-3 rounded-lg border text-sm whitespace-nowrap"
             style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
           >
             {item}
