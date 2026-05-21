@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "뽀모도로 기법으로 공부 효율 2배 높이기",
+  title: "뽀모도로 기법 공부법 — 집중 루틴과 과목별 활용 가이드",
   description:
-    "수능부터 자격증까지, 뽀모도로 기법으로 집중력을 극대화하는 실전 공부법. 25분 집중의 과학적 원리와 단계별 활용법.",
+    "수능, 자격증, 독서, 업무에 뽀모도로 기법을 적용하는 방법. 25분/5분, 50분/10분 루틴과 휴식법, 하루 목표 설정법을 정리했습니다.",
 };
 
 export default function PomodoroStudyPage() {
@@ -17,11 +17,15 @@ export default function PomodoroStudyPage() {
       </div>
 
       <h1 className="text-3xl font-bold mt-4" style={{ color: "var(--color-text)" }}>
-        뽀모도로 기법으로 공부 효율 2배 높이기
+        뽀모도로 기법 공부법: 집중 루틴 만들기
       </h1>
       <p className="mt-3 text-lg leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
         책상 앞에 4시간을 앉아 있었지만 실제로 집중한 시간은 40분뿐인 경험이 있으신가요? 뽀모도로 기법은 이 문제를 해결하기 위해 만들어진 시간 관리 방법입니다.
       </p>
+      <div className="mt-5 p-4 rounded-xl border text-sm" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)", color: "var(--color-text-muted)" }}>
+        <p>최종 업데이트: 2026년 5월 21일</p>
+        <p className="mt-1">작성 기준: 실제 학습 루틴에 적용하기 쉽도록 과목별 작업 단위, 휴식 방식, 하루 목표 사이클을 나눠 정리했습니다.</p>
+      </div>
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
@@ -33,6 +37,36 @@ export default function PomodoroStudyPage() {
         <p className="mt-3" style={{ color: "var(--color-text-muted)" }}>
           뽀모도로 기법의 25분은 이 집중력 곡선의 정점 구간을 활용하는 것입니다. 집중력이 떨어지기 직전에 타이머를 끊고, 짧은 휴식으로 뇌를 리셋한 뒤 다시 새로운 집중 사이클을 시작합니다. 이 패턴을 반복하면 하루 동안 훨씬 더 많은 "진짜 집중 시간"을 확보할 수 있습니다.
         </p>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          나에게 맞는 집중 루틴 고르기
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr style={{ backgroundColor: "var(--color-bg-subtle)" }}>
+                <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>루틴</th>
+                <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>추천 상황</th>
+                <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>사용 팁</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { routine: "15분 / 3분", situation: "집중이 잘 안 되는 날", tip: "시작 장벽을 낮추고 첫 사이클 완료를 목표로 합니다." },
+                { routine: "25분 / 5분", situation: "일반 공부와 독서", tip: "가장 표준적인 루틴입니다. 처음 시작할 때 추천합니다." },
+                { routine: "50분 / 10분", situation: "코딩, 글쓰기, 긴 문제 풀이", tip: "흐름이 끊기면 손해가 큰 작업에 적합합니다." },
+              ].map((row) => (
+                <tr key={row.routine}>
+                  <td className="px-3 py-2 border font-medium" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>{row.routine}</td>
+                  <td className="px-3 py-2 border" style={{ borderColor: "var(--color-border)", color: "var(--color-text-muted)" }}>{row.situation}</td>
+                  <td className="px-3 py-2 border" style={{ borderColor: "var(--color-border)", color: "var(--color-text-muted)" }}>{row.tip}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section className="mt-10">
@@ -124,9 +158,29 @@ export default function PomodoroStudyPage() {
         </div>
       </section>
 
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          실패하지 않는 운영 규칙
+        </h2>
+        <div className="space-y-2">
+          {[
+            "한 사이클에는 한 가지 작업만 넣기",
+            "막힌 문제는 표시하고 다음 사이클에서 다시 보기",
+            "휴식 시간에는 SNS와 짧은 영상 피하기",
+            "완료한 사이클 수보다 실제로 끝낸 작업을 함께 기록하기",
+            "3일 연속 실패하면 목표 사이클 수를 절반으로 낮추기",
+          ].map((item) => (
+            <div key={item} className="flex gap-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+              <span style={{ color: "var(--color-success)" }} className="shrink-0 font-bold mt-0.5">✓</span>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <div className="mt-12 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
         <p className="font-semibold mb-2" style={{ color: "var(--color-text)" }}>지금 바로 뽀모도로 시작하기</p>
-        <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>설치 불필요. 25분 집중 타이머를 바로 시작하세요.</p>
+        <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>설치 불필요. 15분, 25분, 50분 집중 루틴 중 원하는 방식으로 바로 시작하세요.</p>
         <Link
           href="/pomodoro"
           className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"

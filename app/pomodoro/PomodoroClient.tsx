@@ -1,15 +1,23 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
 import OtherToolsNav from "@/components/OtherToolsNav";
 
 type Mode = "focus" | "break";
 type Status = "idle" | "running" | "paused" | "done";
 
-const DURATIONS: Record<Mode, number> = {
-  focus: 25 * 60,
-  break: 5 * 60,
-};
+const PRESETS = [
+  { id: "classic", name: "기본", focus: 25, break: 5, desc: "가장 널리 쓰이는 25분 집중 루틴" },
+  { id: "deep", name: "긴 집중", focus: 50, break: 10, desc: "글쓰기, 코딩, 긴 문제 풀이에 적합" },
+  { id: "starter", name: "짧은 시작", focus: 15, break: 3, desc: "집중이 잘 안 되는 날 시작용" },
+] as const;
+
+type PresetId = (typeof PRESETS)[number]["id"];
+
+function getPreset(id: PresetId) {
+  return PRESETS.find((preset) => preset.id === id) ?? PRESETS[0];
+}
 
 function formatTime(secs: number): string {
   const m = Math.floor(secs / 60).toString().padStart(2, "0");
@@ -22,15 +30,22 @@ function getCircumference(r: number) {
 }
 
 export default function PomodoroClient() {
+  const [presetId, setPresetId] = useState<PresetId>("classic");
   const [mode, setMode] = useState<Mode>("focus");
   const [status, setStatus] = useState<Status>("idle");
-  const [remaining, setRemaining] = useState(DURATIONS.focus);
+  const [remaining, setRemaining] = useState(getPreset("classic").focus * 60);
   const [cycles, setCycles] = useState(0);
   const [notifGranted, setNotifGranted] = useState(false);
 
   const startTimeRef = useRef<number>(0);
-  const startRemainingRef = useRef<number>(DURATIONS.focus);
+  const startRemainingRef = useRef<number>(getPreset("classic").focus * 60);
   const rafRef = useRef<number>(0);
+  const activePreset = getPreset(presetId);
+
+  const durations: Record<Mode, number> = {
+    focus: activePreset.focus * 60,
+    break: activePreset.break * 60,
+  };
 
   // 탭 타이틀 업데이트
   useEffect(() => {
@@ -84,14 +99,28 @@ export default function PomodoroClient() {
   const reset = useCallback(() => {
     cancelAnimationFrame(rafRef.current);
     setStatus("idle");
-    setRemaining(DURATIONS[mode]);
-  }, [mode]);
+    setRemaining(durations[mode]);
+  }, [durations, mode]);
 
   const switchMode = useCallback((newMode: Mode) => {
     cancelAnimationFrame(rafRef.current);
     setMode(newMode);
     setStatus("idle");
-    setRemaining(DURATIONS[newMode]);
+    setRemaining(durations[newMode]);
+  }, [durations]);
+
+  const switchPreset = useCallback((newPresetId: PresetId) => {
+    const nextPreset = getPreset(newPresetId);
+    const nextDurations = {
+      focus: nextPreset.focus * 60,
+      break: nextPreset.break * 60,
+    };
+    cancelAnimationFrame(rafRef.current);
+    setPresetId(newPresetId);
+    setMode("focus");
+    setStatus("idle");
+    setRemaining(nextDurations.focus);
+    setCycles(0);
   }, []);
 
   useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
@@ -106,7 +135,7 @@ export default function PomodoroClient() {
   // SVG 원형 프로그레스
   const R = 90;
   const CIRC = getCircumference(R);
-  const total = DURATIONS[mode];
+  const total = durations[mode];
   const progress = remaining / total;
   const dashOffset = CIRC * (1 - progress);
 
@@ -118,8 +147,58 @@ export default function PomodoroClient() {
         뽀모도로 타이머
       </h1>
       <p className="mt-2" style={{ color: "var(--color-text-muted)" }}>
-        25분 집중, 5분 휴식. 사이클을 반복해 집중력을 높이세요.
+        집중과 휴식을 한 세트로 묶어 공부와 업무 루틴을 설계하세요.
       </p>
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {[
+          "설치 없이 브라우저에서 실행",
+          "집중/휴식 프리셋 제공",
+          "완료 알림과 탭 타이틀 표시",
+        ].map((item) => (
+          <div
+            key={item}
+            className="px-4 py-3 rounded-lg border text-sm"
+            style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+
+      <section className="mt-8">
+        <h2 className="text-sm font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          집중 루틴 선택
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {PRESETS.map((preset) => (
+            <button
+              key={preset.id}
+              type="button"
+              onClick={() => switchPreset(preset.id)}
+              disabled={status === "running"}
+              className="p-4 rounded-xl border text-left transition-colors disabled:opacity-50"
+              style={{
+                borderColor: presetId === preset.id ? "var(--color-primary)" : "var(--color-border)",
+                backgroundColor: presetId === preset.id ? "var(--color-bg)" : "var(--color-bg-subtle)",
+                color: "var(--color-text)",
+              }}
+            >
+              <span className="font-semibold text-sm">{preset.name}</span>
+              <span className="block mt-1 text-sm" style={{ color: "var(--color-primary)" }}>
+                {preset.focus}분 / {preset.break}분
+              </span>
+              <span className="block mt-2 text-xs leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+                {preset.desc}
+              </span>
+            </button>
+          ))}
+        </div>
+        {status === "running" && (
+          <p className="mt-2 text-xs" style={{ color: "var(--color-text-muted)" }}>
+            실행 중에는 루틴을 바꿀 수 없습니다. 일시정지 후 리셋하거나 완료 뒤 변경하세요.
+          </p>
+        )}
+      </section>
 
       {/* 모드 전환 */}
       <div className="mt-8 flex gap-2">
@@ -262,6 +341,15 @@ export default function PomodoroClient() {
           타이머 소리가 주는 마감 압박감이 집중력을 높이는 데 도움을 줍니다.
         </p>
 
+        <div className="mt-5 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+          <p className="font-semibold" style={{ color: "var(--color-text)" }}>루틴 선택 기준</p>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>처음 시작하거나 집중이 흐트러진 날: 15분 / 3분</li>
+            <li>일반 공부, 독서, 문서 작업: 25분 / 5분</li>
+            <li>코딩, 글쓰기, 긴 문제 풀이: 50분 / 10분</li>
+          </ul>
+        </div>
+
         {/* 단계별 사용법 */}
         <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
           뽀모도로 기법 단계별 사용법
@@ -288,6 +376,28 @@ export default function PomodoroClient() {
           ))}
         </div>
 
+        <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+          언제 효과적이고, 언제 덜 맞을까?
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)" }}>
+            <p className="font-semibold text-sm mb-2" style={{ color: "var(--color-success)" }}>잘 맞는 작업</p>
+            <ul className="space-y-1 text-sm">
+              <li>독서, 문제 풀이, 글쓰기</li>
+              <li>코딩, 리팩터링, 문서 정리</li>
+              <li>시작하기 어려운 작고 명확한 작업</li>
+            </ul>
+          </div>
+          <div className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)" }}>
+            <p className="font-semibold text-sm mb-2" style={{ color: "var(--color-warning)" }}>조정이 필요한 작업</p>
+            <ul className="space-y-1 text-sm">
+              <li>회의와 메신저 대응이 많은 업무</li>
+              <li>깊은 몰입이 이미 잘 되는 긴 작업</li>
+              <li>창의적 탐색처럼 흐름이 중요한 작업</li>
+            </ul>
+          </div>
+        </div>
+
         {/* 효과 */}
         <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
           뽀모도로 기법의 효과
@@ -302,6 +412,23 @@ export default function PomodoroClient() {
             <div key={item.title} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)" }}>
               <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.icon} {item.title}</p>
               <p className="text-sm mt-1">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+          좋은 휴식 체크리스트
+        </h3>
+        <div className="space-y-2">
+          {[
+            "자리에서 일어나 어깨와 목을 풀기",
+            "물 마시기 또는 창밖 보기",
+            "휴대폰 알림과 SNS는 다음 긴 휴식까지 미루기",
+            "방금 끝낸 작업을 한 줄로 기록하기",
+          ].map((item) => (
+            <div key={item} className="flex gap-2 text-sm">
+              <span style={{ color: "var(--color-success)" }} className="shrink-0 font-bold mt-0.5">✓</span>
+              <span>{item}</span>
             </div>
           ))}
         </div>
@@ -322,6 +449,20 @@ export default function PomodoroClient() {
               <p className="mt-2 text-sm leading-relaxed">A. {item.a}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+          <p className="font-semibold mb-2" style={{ color: "var(--color-text)" }}>더 자세히 읽기</p>
+          <p className="text-sm mb-4">
+            공부 과목별 뽀모도로 적용법과 하루 목표 사이클 설정법을 가이드에서 확인하세요.
+          </p>
+          <Link
+            href="/guides/pomodoro-study"
+            className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
+            style={{ backgroundColor: "var(--color-primary)" }}
+          >
+            뽀모도로 공부법 보기 →
+          </Link>
         </div>
       </section>
 
