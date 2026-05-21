@@ -5,12 +5,12 @@ import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
 
 const tools = [
-  { href: "/lotto", label: "로또 추첨기" },
-  { href: "/personality", label: "성격 유형 테스트" },
-  { href: "/reaction", label: "반응속도 테스트" },
-  { href: "/pomodoro", label: "뽀모도로" },
-  { href: "/password", label: "비밀번호 생성기" },
   { href: "/guides", label: "가이드" },
+  { href: "/password", label: "비밀번호 생성기" },
+  { href: "/pomodoro", label: "뽀모도로" },
+  { href: "/reaction", label: "반응속도 테스트" },
+  { href: "/personality", label: "성격 유형 테스트" },
+  { href: "/lotto", label: "로또 시뮬레이터" },
 ];
 
 function SunIcon() {

@@ -3,18 +3,19 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About — Daily Pick Lab 소개",
-  description: "Daily Pick Lab은 한국 사용자를 위한 무료 온라인 도구 모음 사이트입니다. 설치 없이, 로그인 없이, 바로 사용할 수 있는 실용적인 도구들을 제공합니다.",
+  description: "Daily Pick Lab은 한국 사용자를 위한 무료 생활 도구와 실용 가이드를 제공합니다. 운영 원칙, 콘텐츠 작성 기준, 개인정보 보호 방식을 안내합니다.",
 };
 
 const tools = [
-  { href: "/lotto", icon: "🎱", name: "로또 번호 추첨기", desc: "1~45 중 6개 번호 무작위 추첨. 동행복권과 동일한 방식으로 1~10게임 동시 생성 가능." },
-  { href: "/personality", icon: "🧠", name: "성격 유형 테스트", desc: "16문항으로 16가지 성격 유형을 분류. 결과 페이지 공유 및 유형별 직업 안내 제공." },
-  { href: "/reaction", icon: "⚡", name: "반응속도 테스트", desc: "ms 단위 정밀 측정. 5회 평균과 개인 최고기록 저장, 전국 평균과 비교." },
-  { href: "/pomodoro", icon: "🍅", name: "뽀모도로 타이머", desc: "25분 집중 / 5분 휴식 사이클. 브라우저 탭 타이틀에도 남은 시간 표시." },
   { href: "/password", icon: "🔐", name: "비밀번호 생성기", desc: "대소문자·숫자·특수문자 조합의 안전한 비밀번호를 브라우저에서만 생성. 서버 전송 없음." },
+  { href: "/pomodoro", icon: "🍅", name: "뽀모도로 타이머", desc: "25분 집중 / 5분 휴식 사이클. 브라우저 탭 타이틀에도 남은 시간 표시." },
+  { href: "/reaction", icon: "⚡", name: "반응속도 테스트", desc: "ms 단위 측정. 5회 평균과 개인 최고기록 저장, 반복 측정 가능." },
+  { href: "/personality", icon: "🧠", name: "성격 유형 테스트", desc: "16문항으로 16가지 성격 유형을 분류. 결과 페이지 공유 및 유형별 해석 제공." },
+  { href: "/lotto", icon: "🎱", name: "로또 번호 시뮬레이터", desc: "1~45 중 6개 번호 무작위 추첨. 최근 당첨번호와 확률 정보를 함께 제공." },
 ];
 
 const updates = [
+  { date: "2026-05", desc: "AdSense 승인 준비를 위해 홈, 소개, 개인정보처리방침, 콘텐츠 작성 기준 정비" },
   { date: "2026-04", desc: "가이드 섹션 신설, 각 툴 페이지 콘텐츠 강화" },
   { date: "2026-03", desc: "성격 유형 결과 페이지 OG 이미지 자동 생성, 다크모드 지원" },
   { date: "2026-03", desc: "Daily Pick Lab 사이트 최초 오픈 — 5개 도구 동시 출시" },
@@ -27,7 +28,8 @@ export default function AboutPage() {
         Daily Pick Lab 소개
       </h1>
       <p className="text-lg mb-10 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-        매일 한 번쯤 써보게 되는 작은 도구들을 모았습니다. 설치 없이, 로그인 없이, 광고 팝업 없이 — 바로 쓸 수 있는 실용적인 도구 모음입니다.
+        매일 한 번쯤 마주치는 작은 선택을 돕기 위해 만든 무료 생활 도구와 실용 가이드 사이트입니다.
+        설치 없이, 로그인 없이, 필요한 기능과 설명을 바로 확인할 수 있게 만드는 것을 목표로 합니다.
       </p>
 
       {/* 사이트 철학 */}
@@ -36,11 +38,30 @@ export default function AboutPage() {
           왜 만들었나요?
         </h2>
         <p style={{ color: "var(--color-text-muted)" }}>
-          로또 번호를 뽑으려고 검색하면 전체 화면을 덮는 광고와 팝업이 먼저 반깁니다. 성격 테스트는 결과를 보려면 회원가입을 요구합니다. 뽀모도로 타이머 앱은 수십 MB를 설치해야 하죠.
+          비밀번호를 만들거나, 집중 시간을 재거나, 간단한 테스트를 해보려고 검색하면
+          회원가입, 앱 설치, 과한 팝업을 먼저 만나는 경우가 많습니다.
         </p>
         <p className="mt-3" style={{ color: "var(--color-text-muted)" }}>
-          Daily Pick Lab은 이 불편함에서 출발했습니다. 자주 쓰는 도구들을 광고 팝업 없이, 회원가입 없이, 앱 설치 없이 바로 쓸 수 있게 만들자는 단순한 목표로 시작됐습니다. 모든 계산은 브라우저에서 처리되므로 개인 정보가 서버로 전송되지 않습니다.
+          Daily Pick Lab은 이 불편함에서 출발했습니다. 기능은 가볍게, 설명은 충분하게 제공하고,
+          개인정보가 필요 없는 도구는 브라우저 안에서만 처리하는 방식을 우선합니다.
         </p>
+      </section>
+
+      <section className="mb-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          운영 정보
+        </h2>
+        <div className="space-y-3 text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+          <p>
+            운영자: Daily Pick Lab 운영팀
+          </p>
+          <p>
+            운영 목적: 한국 사용자가 자주 찾는 생활 도구와 관련 정보를 한곳에서 빠르게 확인할 수 있도록 돕는 것입니다.
+          </p>
+          <p>
+            문의 창구: 버그 제보, 기능 제안, 콘텐츠 오류 신고는 Contact 페이지 또는 contact@dailypicklab.com으로 받을 수 있습니다.
+          </p>
+        </div>
       </section>
 
       {/* 도구 목록 */}
@@ -83,6 +104,24 @@ export default function AboutPage() {
                 <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.title}</p>
                 <p className="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>{item.desc}</p>
               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          콘텐츠 작성 기준
+        </h2>
+        <div className="space-y-3">
+          {[
+            { title: "직접 써볼 수 있는 정보", desc: "가이드는 도구 사용법, 체크리스트, 예시처럼 사용자가 바로 적용할 수 있는 내용을 우선합니다." },
+            { title: "출처와 한계 명시", desc: "보안, 확률, 건강 습관처럼 오해가 생길 수 있는 주제는 참고 자료와 한계를 함께 적습니다." },
+            { title: "정기 업데이트", desc: "로또 당첨번호처럼 시간이 지나면 바뀌는 정보는 업데이트 날짜와 변경 내용을 남깁니다." },
+          ].map((item) => (
+            <div key={item.title} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+              <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.title}</p>
+              <p className="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>{item.desc}</p>
             </div>
           ))}
         </div>

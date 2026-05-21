@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import LottoClient from "./LottoClient";
 
 export const metadata: Metadata = {
-  title: "로또 번호 추첨기 — 무료 온라인 로또 시뮬레이터",
+  title: "로또 번호 시뮬레이터 — 확률 이해와 최근 당첨번호",
   description:
-    "1~45 중 6개 번호를 무작위로 추첨하는 무료 로또 번호 생성기. 여러 게임 동시 추첨, 지난 회차 당첨번호 제공.",
-  keywords: ["로또번호추첨기", "로또번호생성기", "로또시뮬레이터", "로또번호"],
+    "1~45 중 6개 번호를 무작위로 뽑아보는 무료 시뮬레이터입니다. 최근 회차 당첨번호와 로또 확률, 책임 있는 이용 안내를 함께 제공합니다.",
+  keywords: ["로또번호추첨기", "로또번호생성기", "로또시뮬레이터", "로또확률", "로또번호"],
 };
 
 const faqJsonLd = {
