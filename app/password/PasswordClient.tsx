@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import OtherToolsNav from "@/components/OtherToolsNav";
 
 const CHARSET = {
@@ -9,6 +10,23 @@ const CHARSET = {
   number: "0123456789",
   symbol: "!@#$%^&*()-_=+[]{}|;:,.<>?",
 };
+
+function secureRandomIndex(max: number): number {
+  if (max <= 0) return 0;
+
+  const randomValues = new Uint32Array(1);
+  const maxUnbiasedValue = Math.floor(0xffffffff / max) * max;
+
+  do {
+    crypto.getRandomValues(randomValues);
+  } while (randomValues[0] >= maxUnbiasedValue);
+
+  return randomValues[0] % max;
+}
+
+function pickChar(charset: string): string {
+  return charset[secureRandomIndex(charset.length)];
+}
 
 function generatePassword(
   length: number,
@@ -25,28 +43,51 @@ function generatePassword(
 
   // 각 선택 그룹에서 최소 1개 보장
   const required: string[] = [];
-  if (opts.lower) required.push(CHARSET.lower[Math.floor(Math.random() * CHARSET.lower.length)]);
-  if (opts.upper) required.push(CHARSET.upper[Math.floor(Math.random() * CHARSET.upper.length)]);
-  if (opts.number) required.push(CHARSET.number[Math.floor(Math.random() * CHARSET.number.length)]);
-  if (opts.symbol) required.push(CHARSET.symbol[Math.floor(Math.random() * CHARSET.symbol.length)]);
+  if (opts.lower) required.push(pickChar(CHARSET.lower));
+  if (opts.upper) required.push(pickChar(CHARSET.upper));
+  if (opts.number) required.push(pickChar(CHARSET.number));
+  if (opts.symbol) required.push(pickChar(CHARSET.symbol));
 
   const rest = Array.from({ length: length - required.length }, () =>
-    pool[Math.floor(Math.random() * pool.length)]
+    pickChar(pool)
   );
 
-  return [...required, ...rest]
-    .sort(() => Math.random() - 0.5)
-    .join("");
+  const chars = [...required, ...rest];
+  for (let i = chars.length - 1; i > 0; i--) {
+    const j = secureRandomIndex(i + 1);
+    [chars[i], chars[j]] = [chars[j], chars[i]];
+  }
+
+  return chars.join("");
+}
+
+function getPoolSize(opts: { lower: boolean; upper: boolean; number: boolean; symbol: boolean }): number {
+  return [
+    opts.lower ? CHARSET.lower.length : 0,
+    opts.upper ? CHARSET.upper.length : 0,
+    opts.number ? CHARSET.number.length : 0,
+    opts.symbol ? CHARSET.symbol.length : 0,
+  ].reduce((sum, size) => sum + size, 0);
+}
+
+function getStrengthLabel(length: number, poolSize: number): { label: string; desc: string; color: string } {
+  if (poolSize === 0) return { label: "옵션 필요", desc: "문자 종류를 1개 이상 선택하세요.", color: "var(--color-error)" };
+  if (length >= 20 && poolSize >= 62) return { label: "매우 강함", desc: "중요 계정에 권장할 수 있는 수준입니다.", color: "var(--color-success)" };
+  if (length >= 16 && poolSize >= 36) return { label: "강함", desc: "대부분의 개인 계정에 충분한 수준입니다.", color: "var(--color-success)" };
+  if (length >= 12 && poolSize >= 26) return { label: "보통", desc: "가능하면 길이를 16자 이상으로 늘리세요.", color: "var(--color-warning)" };
+  return { label: "약함", desc: "길이를 늘리고 문자 종류를 더 선택하세요.", color: "var(--color-error)" };
 }
 
 export default function PasswordClient() {
-  const [length, setLength] = useState(16);
+  const [length, setLength] = useState(20);
   const [opts, setOpts] = useState({ lower: true, upper: true, number: true, symbol: true });
   const [password, setPassword] = useState("");
   const [copied, setCopied] = useState(false);
 
   const noOptionSelected = !opts.lower && !opts.upper && !opts.number && !opts.symbol;
-  const rangePct = Math.round(((length - 8) / (32 - 8)) * 100);
+  const rangePct = Math.round(((length - 12) / (48 - 12)) * 100);
+  const poolSize = getPoolSize(opts);
+  const strength = getStrengthLabel(length, poolSize);
 
   function handleGenerate() {
     if (noOptionSelected) return;
@@ -100,8 +141,23 @@ export default function PasswordClient() {
         비밀번호 생성기
       </h1>
       <p className="mt-2" style={{ color: "var(--color-text-muted)" }}>
-        대소문자·숫자·특수문자 조합의 안전한 비밀번호를 생성합니다.
+        서버로 전송하지 않고 브라우저에서만 안전한 랜덤 비밀번호를 생성합니다.
       </p>
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {[
+          "crypto.getRandomValues 기반 난수",
+          "생성값 서버 전송 없음",
+          "비밀번호 관리자와 함께 사용 권장",
+        ].map((item) => (
+          <div
+            key={item}
+            className="px-4 py-3 rounded-lg border text-sm"
+            style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
+          >
+            {item}
+          </div>
+        ))}
+      </div>
 
       <div
         className="mt-8 p-6 rounded-xl border"
@@ -122,8 +178,8 @@ export default function PasswordClient() {
           </label>
           <input
             type="range"
-            min={8}
-            max={32}
+            min={12}
+            max={48}
             value={length}
             onChange={(e) => { setLength(Number(e.target.value)); setPassword(""); }}
             className="pw-range w-full h-2 rounded-full appearance-none cursor-pointer"
@@ -132,7 +188,7 @@ export default function PasswordClient() {
             }}
           />
           <div className="flex justify-between text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>
-            <span>8</span><span>32</span>
+            <span>12</span><span>48</span>
           </div>
         </div>
 
@@ -161,6 +217,20 @@ export default function PasswordClient() {
             최소 1개 옵션을 선택하세요.
           </p>
         )}
+
+        <div className="mb-6 p-4 rounded-lg border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg)" }}>
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-sm font-semibold" style={{ color: "var(--color-text)" }}>
+              현재 설정 강도
+            </span>
+            <span className="text-sm font-bold" style={{ color: strength.color }}>
+              {strength.label}
+            </span>
+          </div>
+          <p className="mt-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+            {strength.desc} 문자 후보 수는 {poolSize}개이며, 같은 비밀번호를 여러 사이트에서 재사용하지 않는 것이 핵심입니다.
+          </p>
+        </div>
 
         {/* 생성 버튼 */}
         <button
@@ -202,18 +272,27 @@ export default function PasswordClient() {
       {/* AdSense 콘텐츠 섹션 */}
       <section className="mt-12" style={{ color: "var(--color-text-muted)" }}>
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
-          안전한 비밀번호 만드는 법
+          안전한 비밀번호를 만드는 기준
         </h2>
         <p>
-          안전한 비밀번호는 최소 12자 이상이며, 대문자·소문자·숫자·특수문자를 모두 포함해야 합니다.
-          사전에 있는 단어나 생일, 전화번호처럼 예측하기 쉬운 정보는 반드시 피하세요.
-          해커들은 자동화 도구로 초당 수십억 개의 비밀번호 조합을 시도할 수 있습니다.
+          안전한 비밀번호의 핵심은 길이, 예측 불가능성, 재사용 금지입니다. 최신 NIST SP 800-63B-4 기준은
+          단일 인증용 비밀번호에 최소 15자를 요구하며, 억지로 복잡한 규칙을 외우게 하기보다
+          충분히 긴 비밀번호와 유출된 비밀번호 차단을 중요하게 봅니다.
         </p>
         <p className="mt-3">
-          서비스마다 다른 비밀번호를 사용하는 것이 가장 중요합니다. 하나의 비밀번호가 유출되더라도
-          다른 계정은 안전하게 유지됩니다. 이 생성기는 브라우저 내에서 완전히 동작하며
-          생성된 비밀번호를 서버로 전송하지 않습니다.
+          이 생성기는 브라우저의 암호학적 난수 API를 사용해 비밀번호를 만들고, 생성된 문자열을 서버로
+          전송하지 않습니다. 다만 안전한 비밀번호도 피싱이나 사이트 유출을 완전히 막지는 못하므로,
+          중요한 계정에는 비밀번호 관리자와 2단계 인증을 함께 쓰는 것이 좋습니다.
         </p>
+
+        <div className="mt-5 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+          <p className="font-semibold" style={{ color: "var(--color-text)" }}>추천 설정</p>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>개인 서비스: 16자 이상, 대소문자와 숫자 포함</li>
+            <li>이메일·금융·업무 계정: 20자 이상, 특수문자 포함</li>
+            <li>모든 계정: 사이트마다 서로 다른 비밀번호 사용</li>
+          </ul>
+        </div>
 
         {/* 비밀번호 강도 기준표 */}
         <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
@@ -230,11 +309,11 @@ export default function PasswordClient() {
             </thead>
             <tbody>
               {[
-                { strength: "매우 약함", cond: "숫자만 8자리", time: "즉시 (1초 미만)" },
-                { strength: "약함", cond: "소문자만 8자리", time: "수 분 이내" },
-                { strength: "보통", cond: "대소문자+숫자 10자리", time: "수 시간 ~ 수일" },
-                { strength: "강함", cond: "대소문자+숫자+특수문자 12자리", time: "수 년" },
-                { strength: "매우 강함", cond: "모든 문자 조합 16자리 이상", time: "수천 년 이상" },
+                { strength: "약함", cond: "숫자만 8~10자리", time: "자동화 공격에 취약" },
+                { strength: "보통", cond: "영문+숫자 12자리", time: "개인 계정의 최소선" },
+                { strength: "강함", cond: "대소문자+숫자 16자리", time: "대부분의 개인 계정에 적합" },
+                { strength: "매우 강함", cond: "모든 문자 조합 20자리 이상", time: "중요 계정에 권장" },
+                { strength: "관리 필요", cond: "서로 다른 강한 비밀번호 여러 개", time: "비밀번호 관리자 사용 권장" },
               ].map((row) => (
                 <tr key={row.strength}>
                   <td className="px-3 py-2 border font-medium" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>{row.strength}</td>
@@ -244,6 +323,22 @@ export default function PasswordClient() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+          비밀번호만으로는 부족한 이유
+        </h3>
+        <div className="space-y-3">
+          {[
+            { title: "2단계 인증 켜기", desc: "CISA는 계정 보호를 위해 MFA 사용을 권장합니다. 가능하면 SMS보다 인증 앱, 보안 키, 패스키처럼 피싱에 강한 방식을 우선하세요." },
+            { title: "패스키가 있으면 우선 사용", desc: "패스키는 기기와 서비스 사이의 암호학적 인증을 사용해 가짜 로그인 페이지에 비밀번호를 입력하는 위험을 줄입니다." },
+            { title: "비밀번호 관리자 사용", desc: "계정마다 다른 긴 비밀번호를 기억하기는 어렵습니다. 비밀번호 관리자를 쓰면 재사용을 줄이고 피싱 사이트를 구분하는 데도 도움이 됩니다." },
+          ].map((item) => (
+            <div key={item.title} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+              <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.title}</p>
+              <p className="text-sm mt-1">{item.desc}</p>
+            </div>
+          ))}
         </div>
 
         {/* 절대 쓰면 안 되는 비밀번호 */}
@@ -273,16 +368,30 @@ export default function PasswordClient() {
         </h3>
         <div className="space-y-4">
           {[
-            { q: "생성된 비밀번호가 어딘가에 저장되나요?", a: "아닙니다. 이 생성기는 100% 브라우저에서 동작하며, 생성된 비밀번호는 서버로 전송되거나 저장되지 않습니다. 생성 즉시 직접 복사하여 사용하세요." },
-            { q: "특수문자가 꼭 필요한가요?", a: "필수는 아니지만 강력히 권장합니다. 특수문자를 추가하면 가능한 조합의 수가 기하급수적으로 늘어나 해독이 훨씬 어려워집니다. 일부 오래된 사이트는 특수문자를 지원하지 않으니 그럴 땐 길이를 최대한 늘리세요." },
+            { q: "생성된 비밀번호가 어딘가에 저장되나요?", a: "아닙니다. 이 생성기는 브라우저에서 동작하며, 생성된 비밀번호는 서버로 전송되거나 저장되지 않습니다. 생성 즉시 직접 복사해 비밀번호 관리자에 저장하세요." },
+            { q: "특수문자가 꼭 필요한가요?", a: "사이트가 허용한다면 사용하는 것이 좋습니다. 다만 외우기 어렵게 복잡한 규칙을 억지로 만드는 것보다 충분히 긴 비밀번호와 계정별 고유 비밀번호가 더 중요합니다." },
             { q: "비밀번호 관리 앱을 사용해도 괜찮나요?", a: "네, 강력히 추천합니다. 1Password, Bitwarden, KeePass 같은 비밀번호 관리자는 모든 계정에 서로 다른 강력한 비밀번호를 사용할 수 있게 해줍니다. 마스터 비밀번호 하나만 기억하면 됩니다." },
-            { q: "얼마나 자주 비밀번호를 바꿔야 하나요?", a: "최신 보안 가이드라인(NIST)에서는 강력한 비밀번호를 사용한다면 주기적인 변경보다 유출 의심 시에만 변경하는 것을 권장합니다. 단, 같은 비밀번호를 여러 사이트에 사용 중이라면 지금 당장 변경하세요." },
+            { q: "얼마나 자주 비밀번호를 바꿔야 하나요?", a: "강력하고 고유한 비밀번호를 사용한다면 정기 변경보다 유출 의심, 피싱 입력, 기기 분실처럼 위험 신호가 있을 때 즉시 바꾸는 방식이 더 현실적입니다." },
           ].map((item) => (
             <div key={item.q} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)" }}>
               <p className="font-semibold" style={{ color: "var(--color-text)" }}>Q. {item.q}</p>
               <p className="mt-2 text-sm leading-relaxed">A. {item.a}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+          <p className="font-semibold mb-2" style={{ color: "var(--color-text)" }}>더 자세히 읽기</p>
+          <p className="text-sm mb-4">
+            비밀번호 관리 앱, 2단계 인증, 피싱 예방까지 한 번에 정리한 가이드를 함께 확인해보세요.
+          </p>
+          <Link
+            href="/guides/password-security"
+            className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
+            style={{ backgroundColor: "var(--color-primary)" }}
+          >
+            비밀번호 보안 가이드 보기 →
+          </Link>
         </div>
       </section>
 

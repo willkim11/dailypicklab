@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "2025년 비밀번호 보안 완전 가이드",
+  title: "2026년 비밀번호 보안 완전 가이드",
   description:
-    "해킹을 막는 강력한 비밀번호 만들기부터 비밀번호 관리 앱 활용법까지. 최신 보안 가이드라인 기반 완전 분석.",
+    "강력한 비밀번호 만들기, 비밀번호 관리자, 2단계 인증, 패스키까지 최신 보안 기준을 바탕으로 정리한 실전 가이드.",
 };
 
 export default function PasswordSecurityPage() {
@@ -17,11 +17,16 @@ export default function PasswordSecurityPage() {
       </div>
 
       <h1 className="text-3xl font-bold mt-4" style={{ color: "var(--color-text)" }}>
-        2025년 비밀번호 보안 완전 가이드
+        2026년 비밀번호 보안 완전 가이드
       </h1>
       <p className="mt-3 text-lg leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-        "123456"은 전 세계에서 가장 많이 사용되는 비밀번호입니다. 해커들은 이를 0.001초 만에 뚫습니다. 내 계정을 지키는 단단한 비밀번호를 만드는 방법을 알아봅시다.
+        좋은 비밀번호는 복잡한 기호를 억지로 외우는 문제가 아닙니다. 충분히 길고, 계정마다 다르며,
+        비밀번호 관리자와 2단계 인증으로 보완되는 체계가 더 중요합니다.
       </p>
+      <div className="mt-5 p-4 rounded-xl border text-sm" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)", color: "var(--color-text-muted)" }}>
+        <p>최종 업데이트: 2026년 5월 21일</p>
+        <p className="mt-1">작성 기준: NIST SP 800-63B-4, CISA MFA 안내, 주요 비밀번호 관리자 기능 비교를 참고했습니다.</p>
+      </div>
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
@@ -44,17 +49,18 @@ export default function PasswordSecurityPage() {
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
-          NIST 권고 기준: 2025년 비밀번호 원칙
+          최신 권고 기준: 길이가 먼저다
         </h2>
         <p style={{ color: "var(--color-text-muted)" }}>
-          미국 국립표준기술연구소(NIST)는 2024년 비밀번호 가이드라인을 대폭 업데이트했습니다. 과거의 "90일마다 변경" 정책은 오히려 보안을 약화시킨다는 연구 결과에 기반한 변화입니다.
+          미국 국립표준기술연구소(NIST)의 SP 800-63B-4는 단일 인증용 비밀번호에 최소 15자를 요구합니다.
+          과거처럼 특수문자와 대문자를 억지로 섞게 하는 방식보다, 충분히 긴 비밀번호와 유출된 비밀번호 차단이 더 중요합니다.
         </p>
         <div className="mt-4 space-y-2">
           {[
-            "최소 8자, 권장 15자 이상 — 길이가 복잡성보다 중요",
+            "중요 계정은 16자 이상, 가능하면 20자 이상 권장",
             "주기적 변경 불필요 — 유출 의심 시에만 변경",
-            "대소문자·숫자·특수문자 조합 강제 불필요 — 대신 길이 우선",
-            "의미 있는 단어 3~4개 조합도 강력한 비밀번호 (예: 사과파란하늘여름)",
+            "대소문자·숫자·특수문자 조합보다 길이와 고유성이 우선",
+            "사전에 있는 문장이나 개인정보는 피하고, 생성기는 무작위 문자열을 사용",
             "서비스마다 반드시 다른 비밀번호 사용",
           ].map((rule) => (
             <div key={rule} className="flex gap-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
@@ -101,14 +107,54 @@ export default function PasswordSecurityPage() {
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
-          2단계 인증(2FA): 비밀번호가 유출돼도 안전한 방법
+          2단계 인증과 패스키: 비밀번호가 유출돼도 버티는 방법
         </h2>
         <p style={{ color: "var(--color-text-muted)" }}>
-          가장 강력한 비밀번호도 피싱 공격이나 데이터 유출로 노출될 수 있습니다. 2단계 인증(2FA)은 비밀번호가 유출되어도 계정을 보호하는 추가 보안 장치입니다.
+          가장 강력한 비밀번호도 피싱 공격이나 데이터 유출로 노출될 수 있습니다. 2단계 인증(MFA)은
+          비밀번호가 유출되어도 계정을 보호하는 추가 보안 장치입니다.
         </p>
         <p className="mt-3" style={{ color: "var(--color-text-muted)" }}>
-          Google, 네이버, 카카오 등 주요 서비스는 2단계 인증을 지원합니다. SMS 인증보다 Google Authenticator나 Authy 같은 인증 앱이 훨씬 안전합니다. 지금 당장 가장 중요한 계정(이메일, 인터넷 뱅킹)부터 2단계 인증을 설정하세요.
+          CISA는 피싱에 강한 MFA 사용을 권장합니다. 가능하면 SMS보다 인증 앱, 보안 키, 패스키를 우선하고,
+          지금 당장 이메일, 금융, 클라우드 저장소처럼 중요한 계정부터 켜는 것이 좋습니다.
         </p>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          오늘 바로 점검할 체크리스트
+        </h2>
+        <div className="space-y-2">
+          {[
+            "이메일 계정 비밀번호가 다른 사이트와 겹치지 않는지 확인",
+            "금융, 클라우드, 쇼핑 계정에 2단계 인증 켜기",
+            "비밀번호 관리자에 없는 계정부터 하나씩 등록",
+            "오래된 8~10자리 비밀번호를 16자 이상으로 교체",
+            "패스키를 지원하는 서비스는 패스키 등록",
+          ].map((item) => (
+            <div key={item} className="flex gap-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+              <span style={{ color: "var(--color-success)" }} className="shrink-0 font-bold mt-0.5">✓</span>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          참고 자료
+        </h2>
+        <ul className="space-y-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+          <li>
+            <a href="https://pages.nist.gov/800-63-4/sp800-63b.html" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "var(--color-primary)" }}>
+              NIST SP 800-63B-4 Digital Identity Guidelines
+            </a>
+          </li>
+          <li>
+            <a href="https://www.cisa.gov/secure-our-world/require-multifactor-authentication" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "var(--color-primary)" }}>
+              CISA Require Multifactor Authentication
+            </a>
+          </li>
+        </ul>
       </section>
 
       <div className="mt-12 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
