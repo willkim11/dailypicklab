@@ -236,8 +236,11 @@ export default function PasswordClient() {
         <button
           onClick={handleGenerate}
           disabled={noOptionSelected}
-          className="w-full py-3 rounded-lg font-semibold text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-          style={{ backgroundColor: noOptionSelected ? "var(--color-text-muted)" : "var(--color-primary)" }}
+          className="w-full py-3 rounded-lg font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          style={{
+            backgroundColor: noOptionSelected ? "var(--color-text-muted)" : "var(--color-primary)",
+            color: noOptionSelected ? "var(--color-bg)" : "var(--color-on-primary)",
+          }}
         >
           생성하기
         </button>
@@ -260,7 +263,7 @@ export default function PasswordClient() {
               className="shrink-0 px-3 py-1.5 rounded-md text-sm font-medium transition-colors"
               style={{
                 backgroundColor: copied ? "var(--color-success)" : "var(--color-primary)",
-                color: "white",
+                color: copied ? "white" : "var(--color-on-primary)",
               }}
             >
               {copied ? "복사됨 ✓" : "복사"}
@@ -387,8 +390,8 @@ export default function PasswordClient() {
           </p>
           <Link
             href="/guides/password-security"
-            className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
-            style={{ backgroundColor: "var(--color-primary)" }}
+            className="inline-block px-5 py-3 rounded-lg font-semibold text-sm"
+            style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
           >
             비밀번호 보안 가이드 보기 →
           </Link>

@@ -349,8 +349,8 @@ export default function ReactionClient() {
           </p>
           <Link
             href="/guides/reaction-speed"
-            className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
-            style={{ backgroundColor: "var(--color-primary)" }}
+            className="inline-block px-5 py-3 rounded-lg font-semibold text-sm"
+            style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
           >
             반응속도 향상 가이드 보기 →
           </Link>

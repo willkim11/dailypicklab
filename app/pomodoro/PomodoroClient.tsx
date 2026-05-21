@@ -270,8 +270,8 @@ export default function PomodoroClient() {
           {status === "idle" && (
             <button
               onClick={start}
-              className="px-8 py-3 rounded-lg font-semibold text-white min-h-[44px]"
-              style={{ backgroundColor: modeColor }}
+              className="px-8 py-3 rounded-lg font-semibold min-h-[44px]"
+              style={{ backgroundColor: modeColor, color: mode === "focus" ? "var(--color-on-primary)" : "white" }}
             >
               시작
             </button>
@@ -279,8 +279,8 @@ export default function PomodoroClient() {
           {status === "running" && (
             <button
               onClick={pause}
-              className="px-8 py-3 rounded-lg font-semibold text-white min-h-[44px]"
-              style={{ backgroundColor: "var(--color-warning)" }}
+              className="px-8 py-3 rounded-lg font-semibold min-h-[44px]"
+              style={{ backgroundColor: "var(--color-warning)", color: "var(--color-on-primary)" }}
             >
               일시정지
             </button>
@@ -288,8 +288,8 @@ export default function PomodoroClient() {
           {status === "paused" && (
             <button
               onClick={resume}
-              className="px-8 py-3 rounded-lg font-semibold text-white min-h-[44px]"
-              style={{ backgroundColor: modeColor }}
+              className="px-8 py-3 rounded-lg font-semibold min-h-[44px]"
+              style={{ backgroundColor: modeColor, color: mode === "focus" ? "var(--color-on-primary)" : "white" }}
             >
               재개
             </button>
@@ -297,8 +297,8 @@ export default function PomodoroClient() {
           {status === "done" && (
             <button
               onClick={() => switchMode(mode === "focus" ? "break" : "focus")}
-              className="px-8 py-3 rounded-lg font-semibold text-white min-h-[44px]"
-              style={{ backgroundColor: modeColor }}
+              className="px-8 py-3 rounded-lg font-semibold min-h-[44px]"
+              style={{ backgroundColor: modeColor, color: mode === "focus" ? "var(--color-on-primary)" : "white" }}
             >
               {mode === "focus" ? "휴식 시작" : "집중 시작"}
             </button>
@@ -364,7 +364,7 @@ export default function PomodoroClient() {
             <div key={item.step} className="flex gap-4 p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
               <span
                 className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
-                style={{ backgroundColor: "var(--color-primary)", color: "white" }}
+                style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
               >
                 {item.step}
               </span>
@@ -458,8 +458,8 @@ export default function PomodoroClient() {
           </p>
           <Link
             href="/guides/pomodoro-study"
-            className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
-            style={{ backgroundColor: "var(--color-primary)" }}
+            className="inline-block px-5 py-3 rounded-lg font-semibold text-sm"
+            style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
           >
             뽀모도로 공부법 보기 →
           </Link>

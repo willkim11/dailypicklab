@@ -101,7 +101,7 @@ export default function ReactionSpeedPage() {
             { step: "4", title: "눈 운동 포함하기", desc: "부드러운 눈 추적 운동(Smooth Pursuit)과 빠른 도약 운동(Saccade)을 훈련하면 시각 처리 속도가 향상됩니다. 탁구, 배드민턴이 이 훈련을 자연스럽게 포함합니다." },
           ].map((item) => (
             <div key={item.step} className="flex gap-4 p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
-              <span className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "var(--color-primary)", color: "white" }}>{item.step}</span>
+              <span className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}>{item.step}</span>
               <div>
                 <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.title}</p>
                 <p className="text-sm mt-1 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>{item.desc}</p>
@@ -167,8 +167,8 @@ export default function ReactionSpeedPage() {
         <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>같은 기기에서 5회 평균을 측정하고, 내 최고기록과 비교해보세요.</p>
         <Link
           href="/reaction"
-          className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
-          style={{ backgroundColor: "var(--color-primary)" }}
+          className="inline-block px-5 py-3 rounded-lg font-semibold text-sm"
+          style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
         >
           반응속도 테스트 시작 →
         </Link>

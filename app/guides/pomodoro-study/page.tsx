@@ -183,8 +183,8 @@ export default function PomodoroStudyPage() {
         <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>설치 불필요. 15분, 25분, 50분 집중 루틴 중 원하는 방식으로 바로 시작하세요.</p>
         <Link
           href="/pomodoro"
-          className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
-          style={{ backgroundColor: "var(--color-primary)" }}
+          className="inline-block px-5 py-3 rounded-lg font-semibold text-sm"
+          style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
         >
           뽀모도로 타이머 시작 →
         </Link>

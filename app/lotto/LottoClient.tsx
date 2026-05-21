@@ -119,7 +119,7 @@ export default function LottoClient() {
                   className="px-4 py-2 rounded-lg text-sm font-medium border transition-colors"
                   style={{
                     backgroundColor: gameCount === n ? "var(--color-primary)" : "var(--color-bg)",
-                    color: gameCount === n ? "white" : "var(--color-text)",
+                    color: gameCount === n ? "var(--color-on-primary)" : "var(--color-text)",
                     borderColor: gameCount === n ? "var(--color-primary)" : "var(--color-border)",
                   }}
                 >
@@ -132,8 +132,8 @@ export default function LottoClient() {
           {/* 추첨 버튼 */}
           <button
             onClick={handleDraw}
-            className="w-full py-3 rounded-lg font-semibold text-white transition-colors"
-            style={{ backgroundColor: "var(--color-primary)" }}
+            className="w-full py-3 rounded-lg font-semibold transition-colors"
+            style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
           >
             추첨하기
           </button>

@@ -89,8 +89,8 @@ export default function LottoGuidePage() {
         <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>무작위 추첨기로 1~45 전 구간에서 균등하게 번호를 선택해보세요.</p>
         <Link
           href="/lotto"
-          className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
-          style={{ backgroundColor: "var(--color-primary)" }}
+          className="inline-block px-5 py-3 rounded-lg font-semibold text-sm"
+          style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
         >
           로또 번호 추첨하기 →
         </Link>

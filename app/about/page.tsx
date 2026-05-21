@@ -162,8 +162,8 @@ export default function AboutPage() {
         </p>
         <Link
           href="/contact"
-          className="mt-4 inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
-          style={{ backgroundColor: "var(--color-primary)" }}
+          className="mt-4 inline-block px-5 py-3 rounded-lg font-semibold text-sm"
+          style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
         >
           문의하기 →
         </Link>

@@ -162,8 +162,8 @@ export default function PasswordSecurityPage() {
         <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>브라우저에서 안전하게 동작하며 서버로 전송되지 않습니다.</p>
         <Link
           href="/password"
-          className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
-          style={{ backgroundColor: "var(--color-primary)" }}
+          className="inline-block px-5 py-3 rounded-lg font-semibold text-sm"
+          style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
         >
           비밀번호 생성기 →
         </Link>

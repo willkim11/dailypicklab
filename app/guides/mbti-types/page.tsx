@@ -44,7 +44,7 @@ export default function MbtiTypesPage() {
           ].map((item) => (
             <div key={item.axis} className="p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
               <div className="flex items-center gap-3 mb-2">
-                <span className="px-2 py-0.5 rounded text-sm font-bold" style={{ backgroundColor: "var(--color-primary)", color: "white" }}>{item.axis}</span>
+                <span className="px-2 py-0.5 rounded text-sm font-bold" style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}>{item.axis}</span>
                 <span className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.title}</span>
               </div>
               <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>{item.desc}</p>
@@ -101,8 +101,8 @@ export default function MbtiTypesPage() {
         <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>16문항으로 3~5분이면 완료되는 무료 성격 유형 테스트.</p>
         <Link
           href="/personality"
-          className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
-          style={{ backgroundColor: "var(--color-primary)" }}
+          className="inline-block px-5 py-3 rounded-lg font-semibold text-sm"
+          style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
         >
           성격 유형 테스트 시작 →
         </Link>

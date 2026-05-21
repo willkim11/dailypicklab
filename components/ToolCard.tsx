@@ -11,19 +11,25 @@ export default function ToolCard({ href, icon, title, description }: ToolCardPro
   return (
     <Link
       href={href}
-      className="tool-card group block p-6 rounded-xl border transition-all duration-150 hover:shadow-md"
-      style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
+      className="tool-card group block rounded-xl border p-6 transition-colors duration-150"
+      style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-card)" }}
     >
       <div className="flex flex-col gap-3">
-        <span className="text-3xl" aria-hidden="true">{icon}</span>
+        <span
+          className="flex h-10 w-10 items-center justify-center rounded-md text-xl"
+          style={{ backgroundColor: "var(--color-bg-elevated)" }}
+          aria-hidden="true"
+        >
+          {icon}
+        </span>
         <div>
           <h2
-            className="font-semibold text-lg leading-tight transition-colors"
+            className="text-lg font-bold leading-tight tracking-tight transition-colors"
             style={{ color: "var(--color-text)" }}
           >
             {title}
           </h2>
-          <p className="mt-1 text-sm" style={{ color: "var(--color-text-muted)" }}>
+          <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
             {description}
           </p>
         </div>

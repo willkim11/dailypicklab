@@ -42,7 +42,7 @@ export default function ContactClient() {
               className="px-4 py-2.5 rounded-lg text-sm font-medium border transition-colors text-left"
               style={{
                 backgroundColor: category === c.value ? "var(--color-primary)" : "var(--color-bg)",
-                color: category === c.value ? "white" : "var(--color-text)",
+                color: category === c.value ? "var(--color-on-primary)" : "var(--color-text)",
                 borderColor: category === c.value ? "var(--color-primary)" : "var(--color-border)",
               }}
             >
@@ -97,8 +97,8 @@ export default function ContactClient() {
 
       <button
         type="submit"
-        className="w-full py-3 rounded-lg font-semibold text-white transition-colors"
-        style={{ backgroundColor: "var(--color-primary)" }}
+        className="w-full py-3 rounded-lg font-semibold transition-colors"
+        style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
       >
         이메일로 보내기
       </button>
