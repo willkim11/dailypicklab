@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
 import OtherToolsNav from "@/components/OtherToolsNav";
 
 type Phase = "idle" | "waiting" | "ready" | "result" | "early";
@@ -9,11 +10,19 @@ const TOTAL_ROUNDS = 5;
 const AVERAGE_MS = 250;
 
 function getRating(ms: number): string {
-  if (ms < 180) return "🚀 번개 같은 반응속도!";
-  if (ms < 220) return "⚡ 매우 빠릅니다!";
-  if (ms < 260) return "👍 평균보다 빠릅니다";
-  if (ms < 300) return "😊 평균 수준입니다";
-  return "🐢 조금 느리네요, 다시 도전!";
+  if (ms < 180) return "번개 같은 반응속도";
+  if (ms < 220) return "매우 빠릅니다";
+  if (ms < 260) return "평균보다 빠릅니다";
+  if (ms < 300) return "평균 수준입니다";
+  return "조금 느립니다. 컨디션을 바꿔 다시 측정해보세요";
+}
+
+function getResultAdvice(ms: number): string {
+  if (ms < 180) return "입력 지연이 적은 환경에서 매우 빠르게 반응했습니다. 여러 날 반복 측정해도 비슷하다면 상위권 기록입니다.";
+  if (ms < 220) return "일반적인 시각 반응속도보다 빠른 편입니다. 수면, 카페인, 기기 환경에 따라 10~30ms 정도 달라질 수 있습니다.";
+  if (ms < 260) return "일반 성인 평균 범위에 가깝습니다. 같은 기기에서 아침/저녁 기록을 나눠 보면 컨디션 차이를 확인하기 좋습니다.";
+  if (ms < 300) return "피로, 산만함, 터치 입력 지연의 영향을 받았을 수 있습니다. 손을 따뜻하게 하고 알림을 끈 뒤 다시 측정해보세요.";
+  return "수면 부족, 피로, 입력 장치 지연 가능성이 있습니다. 한 번의 결과로 판단하지 말고 같은 환경에서 3세트 이상 평균을 비교하세요.";
 }
 
 const PHASE_STYLE: Record<Phase, { bg: string; text: string; message: string }> = {
@@ -108,6 +117,21 @@ export default function ReactionClient() {
       <p className="mt-2" style={{ color: "var(--color-text-muted)" }}>
         초록색이 되는 순간 클릭! 5회 평균으로 측정합니다.
       </p>
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {[
+          "5회 평균으로 일시적 오차 완화",
+          "최고기록은 이 기기에만 저장",
+          "기기·브라우저에 따라 오차 발생",
+        ].map((item) => (
+          <div
+            key={item}
+            className="px-4 py-3 rounded-lg border text-sm"
+            style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
+          >
+            {item}
+          </div>
+        ))}
+      </div>
 
       {/* 진행 표시 */}
       <div className="mt-6 flex items-center gap-2">
@@ -180,6 +204,9 @@ export default function ReactionClient() {
             </div>
           </div>
           <div className="mt-4 pt-4 border-t" style={{ borderColor: "var(--color-border)" }}>
+            <p className="text-sm mb-4 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+              {getResultAdvice(avg)}
+            </p>
             <p className="text-xs mb-2" style={{ color: "var(--color-text-muted)" }}>5회 기록</p>
             <div className="flex gap-2">
               {times.map((t, i) => (
@@ -201,7 +228,7 @@ export default function ReactionClient() {
       )}
 
       <p className="mt-4 text-xs" style={{ color: "var(--color-text-muted)" }}>
-        * 브라우저·기기 환경에 따라 ±50ms 오차가 있을 수 있습니다.
+        * 브라우저·기기·입력 장치 환경에 따라 오차가 있을 수 있습니다. 절대값보다 같은 환경에서의 변화 추이를 보세요.
       </p>
 
       {/* AdSense 콘텐츠 섹션 */}
@@ -219,6 +246,15 @@ export default function ReactionClient() {
           격투기 선수나 e스포츠 프로게이머는 지속적인 훈련을 통해 150ms 이하의 반응속도를 보이기도 합니다.
         </p>
 
+        <div className="mt-5 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+          <p className="font-semibold" style={{ color: "var(--color-text)" }}>정확하게 측정하는 방법</p>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>가능하면 같은 기기와 같은 입력 장치로 반복 측정하세요.</li>
+            <li>무선 마우스, 저전력 모드, 백그라운드 앱은 지연을 만들 수 있습니다.</li>
+            <li>한 번의 최고기록보다 5회 평균과 여러 날의 추이를 비교하세요.</li>
+          </ul>
+        </div>
+
         {/* 등급 표 */}
         <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
           반응속도 구간별 등급
@@ -234,12 +270,11 @@ export default function ReactionClient() {
             </thead>
             <tbody>
               {[
-                { range: "~ 150ms", grade: "최상위 1%", level: "프로 스포츠 선수, e스포츠 프로게이머" },
-                { range: "151 ~ 180ms", grade: "상위 10%", level: "운동을 꾸준히 하는 활동적인 사람" },
-                { range: "181 ~ 220ms", grade: "평균 이상", level: "집중력이 높고 건강한 성인" },
-                { range: "221 ~ 260ms", grade: "평균", level: "일반 성인 대부분이 이 범위" },
-                { range: "261 ~ 300ms", grade: "평균 이하", level: "피로하거나 집중력이 낮은 상태" },
-                { range: "301ms ~", grade: "느림", level: "수면 부족, 피로, 음주 후 상태에 해당" },
+                { range: "~ 180ms", grade: "매우 빠름", level: "입력 지연이 적은 환경에서 상위권 기록" },
+                { range: "181 ~ 220ms", grade: "빠름", level: "일반 평균보다 빠른 편" },
+                { range: "221 ~ 260ms", grade: "평균권", level: "일반 성인 다수가 이 범위" },
+                { range: "261 ~ 300ms", grade: "조금 느림", level: "피로, 산만함, 기기 지연 가능" },
+                { range: "301ms ~", grade: "느림", level: "컨디션이나 환경을 바꿔 재측정 권장" },
               ].map((row) => (
                 <tr key={row.range}>
                   <td className="px-3 py-2 border font-mono font-medium" style={{ borderColor: "var(--color-border)", color: "var(--color-primary)" }}>{row.range}</td>
@@ -249,6 +284,23 @@ export default function ReactionClient() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <h3 className="text-lg font-semibold mt-8 mb-3" style={{ color: "var(--color-text)" }}>
+          측정 오차를 만드는 요소
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            { title: "화면 주사율", desc: "60Hz 화면은 약 16.7ms 단위로 화면이 갱신됩니다. 고주사율 화면에서는 자극을 더 빨리 볼 수 있습니다." },
+            { title: "입력 장치", desc: "마우스, 터치스크린, 무선 장치마다 클릭 감지 지연이 다릅니다." },
+            { title: "브라우저 상태", desc: "백그라운드 작업, 절전 모드, 탭 상태에 따라 타이머와 렌더링이 흔들릴 수 있습니다." },
+            { title: "몸 상태", desc: "수면 부족, 손 온도, 스트레스, 카페인 섭취량이 결과에 영향을 줍니다." },
+          ].map((item) => (
+            <div key={item.title} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)" }}>
+              <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.title}</p>
+              <p className="text-sm mt-1">{item.desc}</p>
+            </div>
+          ))}
         </div>
 
         {/* 향상 방법 */}
@@ -288,6 +340,20 @@ export default function ReactionClient() {
               <p className="mt-2 text-sm leading-relaxed">A. {item.a}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+          <p className="font-semibold mb-2" style={{ color: "var(--color-text)" }}>더 자세히 읽기</p>
+          <p className="text-sm mb-4">
+            반응속도에 영향을 주는 요인과 훈련 루틴을 가이드에서 더 자세히 확인하세요.
+          </p>
+          <Link
+            href="/guides/reaction-speed"
+            className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
+            style={{ backgroundColor: "var(--color-primary)" }}
+          >
+            반응속도 향상 가이드 보기 →
+          </Link>
         </div>
       </section>
 

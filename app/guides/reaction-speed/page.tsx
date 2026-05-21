@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "반응속도를 높이는 과학적 방법",
+  title: "반응속도 높이는 방법 — 측정 오차와 훈련 루틴 가이드",
   description:
-    "뇌과학이 밝혀낸 반응속도의 비밀과 게이머·운동선수처럼 빠르게 반응하는 훈련법. 반응속도에 영향을 미치는 요인 완전 분석.",
+    "반응속도에 영향을 주는 수면, 기기, 화면 주사율, 입력 지연을 이해하고 같은 환경에서 꾸준히 훈련하는 방법을 정리했습니다.",
 };
 
 export default function ReactionSpeedPage() {
@@ -17,11 +17,16 @@ export default function ReactionSpeedPage() {
       </div>
 
       <h1 className="text-3xl font-bold mt-4" style={{ color: "var(--color-text)" }}>
-        반응속도를 높이는 과학적 방법
+        반응속도 높이는 방법: 측정과 훈련 가이드
       </h1>
       <p className="mt-3 text-lg leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-        프로게이머의 반응속도는 150ms, 일반인은 250ms. 이 100ms 차이가 롤드컵 우승과 패배를 가릅니다. 반응속도는 타고나는 것일까요, 훈련으로 키울 수 있는 것일까요?
+        반응속도는 타고난 감각만으로 결정되지 않습니다. 수면, 집중 상태, 입력 장치, 화면 주사율,
+        반복 훈련이 모두 결과에 영향을 줍니다. 중요한 것은 한 번의 최고기록보다 같은 환경에서의 변화 추이입니다.
       </p>
+      <div className="mt-5 p-4 rounded-xl border text-sm" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)", color: "var(--color-text-muted)" }}>
+        <p>최종 업데이트: 2026년 5월 21일</p>
+        <p className="mt-1">작성 기준: 브라우저 기반 시각 반응속도 테스트에서 생기는 입력 지연, 화면 주사율, 컨디션 변수를 구분해 정리했습니다.</p>
+      </div>
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
@@ -33,6 +38,30 @@ export default function ReactionSpeedPage() {
         <p className="mt-3" style={{ color: "var(--color-text-muted)" }}>
           이 전체 과정이 200~250ms 안에 일어납니다. 흥미로운 점은 반복 훈련을 통해 뇌가 이 경로를 더 효율적으로 처리하도록 변한다는 것입니다. 이를 신경가소성(Neuroplasticity)이라 부릅니다.
         </p>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          먼저 측정 환경을 고정하세요
+        </h2>
+        <p style={{ color: "var(--color-text-muted)" }}>
+          반응속도 테스트는 기기 차이에 민감합니다. 같은 사람이더라도 스마트폰 터치, 노트북 트랙패드,
+          유선 마우스, 무선 마우스에서 결과가 다르게 나올 수 있습니다. 그래서 훈련 효과를 보려면 환경을 고정해야 합니다.
+        </p>
+        <div className="mt-4 space-y-2">
+          {[
+            "같은 기기와 같은 브라우저로 측정하기",
+            "마우스 배터리와 연결 상태 확인하기",
+            "절전 모드와 백그라운드 다운로드 끄기",
+            "아침/저녁처럼 측정 시간대를 나눠 기록하기",
+            "최고기록보다 5회 평균을 기준으로 비교하기",
+          ].map((item) => (
+            <div key={item} className="flex gap-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+              <span style={{ color: "var(--color-success)" }} className="shrink-0 font-bold mt-0.5">✓</span>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="mt-10">
@@ -84,6 +113,25 @@ export default function ReactionSpeedPage() {
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          7일 훈련 루틴
+        </h2>
+        <div className="space-y-3">
+          {[
+            { day: "1~2일차", task: "기준선 측정", desc: "하루 3세트씩 측정해 평균 범위를 확인합니다. 아직 빠르게 하려 하지 말고 환경을 고정하는 데 집중하세요." },
+            { day: "3~4일차", task: "시각 집중 훈련", desc: "측정 전 30초 동안 화면 중앙을 보고 호흡을 고릅니다. 급하게 누르기보다 초록색 전환을 정확히 보는 연습을 합니다." },
+            { day: "5~6일차", task: "컨디션 비교", desc: "수면 직후, 커피 섭취 후, 저녁 피로 상태를 나눠 측정합니다. 어떤 조건에서 느려지는지 찾습니다." },
+            { day: "7일차", task: "평균 비교", desc: "첫날 평균과 마지막 날 평균을 비교합니다. 10ms 이상 차이가 나면 환경과 컨디션 변화도 함께 기록하세요." },
+          ].map((item) => (
+            <div key={item.day} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
+              <p className="font-semibold text-sm" style={{ color: "var(--color-primary)" }}>{item.day} · {item.task}</p>
+              <p className="text-sm mt-1 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
           직업별 평균 반응속도
         </h2>
         <div className="overflow-x-auto">
@@ -116,7 +164,7 @@ export default function ReactionSpeedPage() {
 
       <div className="mt-12 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
         <p className="font-semibold mb-2" style={{ color: "var(--color-text)" }}>지금 내 반응속도 측정하기</p>
-        <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>5회 평균과 개인 최고기록을 저장합니다.</p>
+        <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>같은 기기에서 5회 평균을 측정하고, 내 최고기록과 비교해보세요.</p>
         <Link
           href="/reaction"
           className="inline-block px-5 py-3 rounded-lg font-semibold text-white text-sm"
