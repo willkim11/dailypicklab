@@ -15,9 +15,10 @@ const tools = [
 ];
 
 const updates = [
+  { date: "2026-05", desc: "고대비 브랜드 디자인 적용, 가이드 허브 구조화, 성격 유형·로또 확률 콘텐츠 강화" },
   { date: "2026-05", desc: "AdSense 승인 준비를 위해 홈, 소개, 개인정보처리방침, 콘텐츠 작성 기준 정비" },
   { date: "2026-04", desc: "가이드 섹션 신설, 각 툴 페이지 콘텐츠 강화" },
-  { date: "2026-03", desc: "성격 유형 결과 페이지 OG 이미지 자동 생성, 다크모드 지원" },
+  { date: "2026-03", desc: "성격 유형 결과 페이지 OG 이미지 자동 생성, 모바일 반응형 도구 UI 정리" },
   { date: "2026-03", desc: "Daily Pick Lab 사이트 최초 오픈 — 5개 도구 동시 출시" },
 ];
 
@@ -127,6 +128,16 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="mb-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          광고와 콘텐츠 운영 기준
+        </h2>
+        <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+          사이트 운영 비용을 충당하기 위해 문맥 광고가 표시될 수 있지만, 콘텐츠 본문과 도구 사용 흐름을 방해하지 않는 배치를 우선합니다.
+          광고, 외부 링크, 참고 자료는 사용자가 구분할 수 있도록 표시하며, 도구 결과를 과장하거나 보장하는 표현은 사용하지 않습니다.
+        </p>
+      </section>
+
       {/* 업데이트 이력 */}
       <section className="mb-10">
         <h2 className="text-xl font-semibold mb-4" style={{ color: "var(--color-text)" }}>
@@ -168,6 +179,10 @@ export default function AboutPage() {
           문의하기 →
         </Link>
       </section>
+
+      <p className="mt-10 text-sm" style={{ color: "var(--color-text-muted)" }}>
+        최종 업데이트: 2026년 5월 21일
+      </p>
     </div>
   );
 }

@@ -28,10 +28,20 @@ export default function PrivacyPage() {
           <p style={{ color: "var(--color-text-muted)" }}>
             본 사이트는 사이트 운영 비용을 충당하기 위해 Google AdSense 광고 서비스를 사용할 수 있습니다.
             Google 및 Google의 광고 파트너는 광고 제공, 광고 빈도 제한, 광고 성과 측정,
-            맞춤형 광고 제공을 위해 쿠키 또는 유사한 기술을 사용할 수 있습니다.
+            맞춤형 광고 제공을 위해 쿠키, 웹 비콘, IP 주소, 광고 식별자 또는 유사한 기술을 사용할 수 있습니다.
           </p>
           <p className="mt-2" style={{ color: "var(--color-text-muted)" }}>
             Google의 개인정보 사용 방식에 대한 자세한 내용은{" "}
+            <a
+              href="https://policies.google.com/technologies/partner-sites"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+              style={{ color: "var(--color-primary)" }}
+            >
+              Google이 파트너 사이트의 정보를 사용하는 방식
+            </a>
+            과{" "}
             <a
               href="https://policies.google.com/privacy"
               target="_blank"
@@ -89,7 +99,15 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3">6. 외부 링크</h2>
+          <h2 className="text-lg font-semibold mb-3">6. 어린이 개인정보</h2>
+          <p style={{ color: "var(--color-text-muted)" }}>
+            본 사이트는 만 14세 미만 아동을 주요 대상으로 하지 않으며, 아동의 개인정보를 의도적으로 수집하지 않습니다.
+            보호자가 개인정보 관련 문의를 주시면 확인 후 필요한 조치를 진행합니다.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold mb-3">7. 외부 링크</h2>
           <p style={{ color: "var(--color-text-muted)" }}>
             본 사이트의 가이드나 안내문에는 참고 자료를 위한 외부 링크가 포함될 수 있습니다.
             외부 사이트의 개인정보 처리와 쿠키 사용은 해당 사이트의 정책을 따릅니다.
@@ -97,7 +115,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-3">7. 문의</h2>
+          <h2 className="text-lg font-semibold mb-3">8. 문의</h2>
           <p style={{ color: "var(--color-text-muted)" }}>
             개인정보 관련 문의사항은{" "}
             <a href="/contact" className="underline" style={{ color: "var(--color-primary)" }}>
