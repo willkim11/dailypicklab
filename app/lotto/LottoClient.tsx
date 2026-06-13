@@ -67,6 +67,7 @@ const RECENT_RESULTS_PAGE_SIZE = 5;
 
 // 지난 회차 당첨번호 (수동 업데이트)
 const RECENT_RESULTS = [
+  { round: 1228, date: "2026-06-13", numbers: [24, 29, 30, 31, 35, 44], bonus: 1 },
   { round: 1227, date: "2026-06-06", numbers: [1, 14, 16, 34, 41, 44], bonus: 13 },
   { round: 1226, date: "2026-05-30", numbers: [4, 6, 13, 17, 26, 28], bonus: 41 },
   { round: 1225, date: "2026-05-23", numbers: [8, 9, 19, 25, 41, 42], bonus: 33 },
