@@ -65,7 +65,7 @@ const GAME_COUNT_OPTIONS = [1, 5, 10];
 const INITIAL_RECENT_RESULT_COUNT = 3;
 const RECENT_RESULTS_PAGE_SIZE = 5;
 
-// 지난 회차 당첨번호 (수동 업데이트)
+// 지난 회차 당첨번호
 const RECENT_RESULTS = [
   { round: 1231, date: "2026-07-04", numbers: [4, 13, 14, 18, 31, 38], bonus: 15 },
   { round: 1230, date: "2026-06-27", numbers: [3, 8, 9, 22, 28, 42], bonus: 45 },
@@ -365,7 +365,7 @@ export default function LottoClient() {
           </p>
           <p className="mt-3">
             당첨번호는 매주 토요일 오후 8시 45분 MBC에서 생중계됩니다. 이 페이지의 최근 당첨번호는
-            수동으로 업데이트됩니다.
+            동행복권 공개 결과를 기준으로 업데이트됩니다.
           </p>
 
           <div className="mt-6 space-y-3">

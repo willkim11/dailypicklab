@@ -16,7 +16,7 @@ const tools = [
 
 const updates = [
   { date: "2026-05", desc: "고대비 브랜드 디자인 적용, 가이드 허브 구조화, 성격 유형·로또 확률 콘텐츠 강화" },
-  { date: "2026-05", desc: "AdSense 승인 준비를 위해 홈, 소개, 개인정보처리방침, 콘텐츠 작성 기준 정비" },
+  { date: "2026-05", desc: "홈, 소개, 개인정보처리방침, 콘텐츠 작성 기준 정비" },
   { date: "2026-04", desc: "가이드 섹션 신설, 각 툴 페이지 콘텐츠 강화" },
   { date: "2026-03", desc: "성격 유형 결과 페이지 OG 이미지 자동 생성, 모바일 반응형 도구 UI 정리" },
   { date: "2026-03", desc: "Daily Pick Lab 사이트 최초 오픈 — 5개 도구 동시 출시" },
@@ -118,7 +118,7 @@ export default function AboutPage() {
           {[
             { title: "직접 써볼 수 있는 정보", desc: "가이드는 도구 사용법, 체크리스트, 예시처럼 사용자가 바로 적용할 수 있는 내용을 우선합니다." },
             { title: "출처와 한계 명시", desc: "보안, 확률, 건강 습관처럼 오해가 생길 수 있는 주제는 참고 자료와 한계를 함께 적습니다." },
-            { title: "정기 업데이트", desc: "로또 당첨번호처럼 시간이 지나면 바뀌는 정보는 업데이트 날짜와 변경 내용을 남깁니다." },
+            { title: "정기 업데이트", desc: "로또 당첨번호처럼 시간이 지나면 바뀌는 정보는 기준 날짜와 변경 내용을 남깁니다." },
           ].map((item) => (
             <div key={item.title} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
               <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.title}</p>

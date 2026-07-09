@@ -19,6 +19,10 @@ export async function generateMetadata({
   return {
     title: `${type} — ${info.nickname} | 성격 유형 테스트`,
     description: `나의 성격 유형은 ${type} ${info.nickname}. ${info.description.slice(0, 80)}...`,
+    robots: {
+      index: false,
+      follow: true,
+    },
     openGraph: {
       title: `나는 ${type} ${info.nickname}입니다`,
       description: info.description.slice(0, 100),

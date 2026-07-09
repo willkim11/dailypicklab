@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "2026년 비밀번호 보안 완전 가이드",
+  title: "2026년 비밀번호 보안 실전 가이드",
   description:
     "강력한 비밀번호 만들기, 비밀번호 관리자, 2단계 인증, 패스키까지 최신 보안 기준을 바탕으로 정리한 실전 가이드.",
 };
@@ -17,7 +17,7 @@ export default function PasswordSecurityPage() {
       </div>
 
       <h1 className="text-3xl font-bold mt-4" style={{ color: "var(--color-text)" }}>
-        2026년 비밀번호 보안 완전 가이드
+        2026년 비밀번호 보안 실전 가이드
       </h1>
       <p className="mt-3 text-lg leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
         좋은 비밀번호는 복잡한 기호를 억지로 외우는 문제가 아닙니다. 충분히 길고, 계정마다 다르며,

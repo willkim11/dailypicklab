@@ -3,9 +3,9 @@ import Link from "next/link";
 import { ALL_TYPES, TYPE_INFO } from "@/lib/personality";
 
 export const metadata: Metadata = {
-  title: "16가지 성격 유형 완전 분석 — MBTI 가이드",
+  title: "16가지 성격 유형 가이드 — MBTI 축과 활용법",
   description:
-    "MBTI 4가지 축의 의미와 16가지 성격 유형의 특징, 직업, 인간관계 패턴을 한 번에 정리한 완전 가이드.",
+    "MBTI 4가지 축의 의미와 16가지 성격 유형을 자기 이해용으로 읽는 방법, 한계와 주의점을 함께 정리한 가이드.",
 };
 
 const groups = [
@@ -25,11 +25,17 @@ export default function MbtiTypesPage() {
       </div>
 
       <h1 className="text-3xl font-bold mt-4" style={{ color: "var(--color-text)" }}>
-        16가지 성격 유형 완전 분석
+        16가지 성격 유형 가이드
       </h1>
       <p className="mt-3 text-lg leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-        "나는 INFP야"라는 말을 들어봤을 것입니다. MBTI는 전 세계에서 가장 널리 쓰이는 성격 유형 분류 방식 중 하나입니다. 4가지 축과 16가지 유형의 의미를 정확히 이해해봅시다.
+        "나는 INFP야"라는 말을 들어봤을 것입니다. MBTI는 널리 알려진 성격 유형 분류 방식이지만,
+        사람을 단정하는 검사라기보다 자기 이해를 돕는 언어에 가깝습니다. 4가지 축과 16가지 유형의 의미를
+        가볍고 조심스럽게 읽어봅시다.
       </p>
+      <div className="mt-5 p-4 rounded-xl border text-sm" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)", color: "var(--color-text-muted)" }}>
+        <p>최종 업데이트: 2026년 5월 21일</p>
+        <p className="mt-1">작성 기준: MBTI의 4가지 선호 지표와 온라인 성격 유형 테스트의 한계를 함께 반영했습니다.</p>
+      </div>
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-4" style={{ color: "var(--color-text)" }}>
@@ -96,6 +102,20 @@ export default function MbtiTypesPage() {
         </p>
       </section>
 
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          온라인 성격 유형 테스트의 한계
+        </h2>
+        <p style={{ color: "var(--color-text-muted)" }}>
+          이 사이트의 성격 유형 테스트는 공식 MBTI 검사가 아니며, 상담이나 채용, 진단 목적으로 사용할 수 없습니다.
+          문항 수가 적은 온라인 테스트는 그날의 기분, 최근 경험, 문항 해석 방식에 따라 결과가 달라질 수 있습니다.
+        </p>
+        <p className="mt-3" style={{ color: "var(--color-text-muted)" }}>
+          결과는 "내가 자주 쓰는 사고와 행동 패턴을 돌아보는 참고 자료"로만 사용하세요. 중요한 진로, 관계, 건강,
+          업무 결정은 성격 유형 하나가 아니라 실제 경험과 주변 피드백, 전문가 조언을 함께 고려하는 편이 안전합니다.
+        </p>
+      </section>
+
       <div className="mt-12 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
         <p className="font-semibold mb-2" style={{ color: "var(--color-text)" }}>내 성격 유형 알아보기</p>
         <p className="text-sm mb-4" style={{ color: "var(--color-text-muted)" }}>16문항으로 3~5분이면 완료되는 무료 성격 유형 테스트.</p>
@@ -107,6 +127,24 @@ export default function MbtiTypesPage() {
           성격 유형 테스트 시작 →
         </Link>
       </div>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          참고 자료
+        </h2>
+        <ul className="space-y-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+          <li>
+            <a href="https://www.myersbriggs.org/my-mbti-personality-type/mbti-basics/" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "var(--color-primary)" }}>
+              The Myers-Briggs Company, MBTI Basics
+            </a>
+          </li>
+          <li>
+            <a href="https://www.apa.org/topics/personality" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "var(--color-primary)" }}>
+              American Psychological Association, Personality
+            </a>
+          </li>
+        </ul>
+      </section>
     </article>
   );
 }

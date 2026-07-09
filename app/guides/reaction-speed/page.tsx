@@ -25,7 +25,7 @@ export default function ReactionSpeedPage() {
       </p>
       <div className="mt-5 p-4 rounded-xl border text-sm" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)", color: "var(--color-text-muted)" }}>
         <p>최종 업데이트: 2026년 5월 21일</p>
-        <p className="mt-1">작성 기준: 브라우저 기반 시각 반응속도 테스트에서 생기는 입력 지연, 화면 주사율, 컨디션 변수를 구분해 정리했습니다.</p>
+        <p className="mt-1">작성 기준: 브라우저 기반 시각 반응속도 테스트에서 생기는 입력 지연, 화면 주사율, 수면과 피로 변수를 구분해 정리했습니다.</p>
       </div>
 
       <section className="mt-10">
@@ -33,10 +33,10 @@ export default function ReactionSpeedPage() {
           반응속도의 뇌과학: 어떻게 작동하는가?
         </h2>
         <p style={{ color: "var(--color-text-muted)" }}>
-          반응속도는 세 단계로 구성됩니다. 첫째, 눈이 빛을 감지해 전기 신호로 변환합니다 (약 10ms). 둘째, 신호가 시신경을 통해 뇌의 시각 피질에 도달합니다 (약 30~50ms). 셋째, 뇌가 신호를 처리하고 운동 신경에 명령을 내려 손가락이 클릭합니다 (약 100~150ms).
+          반응속도는 대체로 세 단계로 나눠 볼 수 있습니다. 첫째, 눈이 화면 변화를 감지합니다. 둘째, 시각 정보가 뇌에서 처리됩니다. 셋째, 뇌가 운동 신경에 명령을 내려 손가락이 클릭합니다.
         </p>
         <p className="mt-3" style={{ color: "var(--color-text-muted)" }}>
-          이 전체 과정이 200~250ms 안에 일어납니다. 흥미로운 점은 반복 훈련을 통해 뇌가 이 경로를 더 효율적으로 처리하도록 변한다는 것입니다. 이를 신경가소성(Neuroplasticity)이라 부릅니다.
+          온라인 테스트에서 보이는 값은 이 생리적 반응에 화면 주사율, 브라우저 렌더링, 마우스나 터치 입력 지연이 더해진 결과입니다. 그래서 한 번의 최고기록보다 같은 환경에서 반복 측정한 평균을 보는 편이 더 실용적입니다.
         </p>
       </section>
 
@@ -70,13 +70,13 @@ export default function ReactionSpeedPage() {
         </h2>
         <div className="space-y-3">
           {[
-            { factor: "수면", impact: "매우 높음", desc: "수면 부족 24시간이면 반응속도가 음주 운전 수준(BAC 0.1%)으로 떨어집니다. 7~9시간 수면은 반응속도 최적화의 기본 중의 기본입니다." },
-            { factor: "연령", impact: "높음", desc: "반응속도는 18~24세에 정점을 찍고 이후 서서히 저하됩니다. 그러나 규칙적인 운동과 훈련으로 40~50대에도 20대 수준을 유지하는 사례가 많습니다." },
-            { factor: "카페인", impact: "중간", desc: "적정량의 카페인(커피 1~2잔)은 중추신경계를 자극해 반응속도를 5~10ms 향상시킵니다. 그러나 과다 섭취하면 불안과 떨림으로 오히려 역효과가 납니다." },
-            { factor: "훈련", impact: "높음", desc: "반복적인 반응 훈련은 신경 회로를 강화하고 반응 패턴을 '자동화'합니다. 프로게이머들이 하루 10시간 이상 플레이하는 이유 중 하나입니다." },
-            { factor: "운동", impact: "높음", desc: "유산소 운동은 뇌 혈류를 증가시키고 신경 전달 물질 분비를 촉진합니다. 줄넘기, 탁구, 배드민턴처럼 순발력이 필요한 운동이 특히 효과적입니다." },
-            { factor: "스트레스", impact: "중간", desc: "적당한 긴장감은 반응속도를 높이지만 (요키스-도드슨 법칙), 과도한 스트레스는 집중력을 방해해 반응이 느려집니다." },
-            { factor: "온도", impact: "낮음", desc: "손가락 근육이 차가우면 운동 신경 전달이 느려집니다. 중요한 시합 전 손을 따뜻하게 유지하는 것이 도움됩니다." },
+            { factor: "수면", impact: "매우 높음", desc: "수면 부족과 피로는 주의력, 판단, 반응 시간에 영향을 줄 수 있습니다. 같은 테스트라도 잠을 충분히 잔 날과 피곤한 날의 평균이 달라질 수 있습니다." },
+            { factor: "연령", impact: "높음", desc: "반응 시간은 연령, 시력, 운동 습관, 기기 사용 경험에 따라 달라질 수 있습니다. 단순히 나이만으로 결과를 해석하기보다 내 기준선을 먼저 잡는 것이 좋습니다." },
+            { factor: "카페인", impact: "중간", desc: "카페인은 각성도를 높일 수 있지만 사람마다 반응이 다릅니다. 과다 섭취는 손 떨림, 불안, 수면 질 저하로 다음 측정에 불리할 수 있습니다." },
+            { factor: "훈련", impact: "높음", desc: "반복 측정은 테스트 방식에 익숙해지는 효과를 만듭니다. 실제 반응 능력 향상과 단순한 숙련 효과를 구분하려면 기록 조건을 함께 남기세요." },
+            { factor: "운동", impact: "높음", desc: "규칙적인 신체 활동은 집중력과 컨디션 관리에 도움이 됩니다. 탁구, 배드민턴처럼 시각 자극에 빠르게 반응하는 운동은 훈련 루틴으로 활용하기 좋습니다." },
+            { factor: "스트레스", impact: "중간", desc: "긴장이 너무 낮으면 집중이 흐려지고, 너무 높으면 서두르다 실수가 늘 수 있습니다. 테스트 전 짧게 호흡을 고르는 것만으로도 결과가 안정됩니다." },
+            { factor: "온도", impact: "낮음", desc: "손이 차갑거나 마우스 그립이 불편하면 클릭 동작이 둔해질 수 있습니다. 측정 전 손과 자세를 편하게 만드는 것이 좋습니다." },
           ].map((item) => (
             <div key={item.factor} className="flex gap-4 p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
               <div className="shrink-0 text-center">
@@ -87,6 +87,17 @@ export default function ReactionSpeedPage() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          이 테스트의 한계
+        </h2>
+        <p style={{ color: "var(--color-text-muted)" }}>
+          브라우저 반응속도 테스트는 의료 검사나 전문 스포츠 측정 장비가 아닙니다. 운영체제, 브라우저, 디스플레이 주사율,
+          입력 장치, 백그라운드 작업에 따라 수십 ms 차이가 날 수 있습니다. 건강 문제, 수면 장애, 약물 영향이 의심된다면
+          온라인 테스트 결과만으로 판단하지 말고 전문가와 상담하세요.
+        </p>
       </section>
 
       <section className="mt-10">
@@ -132,14 +143,18 @@ export default function ReactionSpeedPage() {
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
-          직업별 평균 반응속도
+          참고용 반응속도 범위
         </h2>
+        <p className="mb-4" style={{ color: "var(--color-text-muted)" }}>
+          아래 표는 온라인 시각 반응 테스트에서 흔히 관찰되는 대략적인 범위입니다. 공식 직업별 기준이나 선발 지표가 아니며,
+          장비와 테스트 방식에 따라 크게 달라질 수 있습니다.
+        </p>
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr style={{ backgroundColor: "var(--color-bg-subtle)" }}>
-                <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>직업/분류</th>
-                <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>평균 반응속도</th>
+                <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>분류</th>
+                <th className="text-left px-3 py-2 border font-semibold" style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}>참고 범위</th>
               </tr>
             </thead>
             <tbody>
@@ -173,6 +188,29 @@ export default function ReactionSpeedPage() {
           반응속도 테스트 시작 →
         </Link>
       </div>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
+          참고 자료
+        </h2>
+        <ul className="space-y-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+          <li>
+            <a href="https://www.nhtsa.gov/risky-driving/drowsy-driving" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "var(--color-primary)" }}>
+              NHTSA Drowsy Driving
+            </a>
+          </li>
+          <li>
+            <a href="https://www.cdc.gov/sleep/about/index.html" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "var(--color-primary)" }}>
+              CDC Sleep and Sleep Disorders
+            </a>
+          </li>
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "var(--color-primary)" }}>
+              MDN Performance.now()
+            </a>
+          </li>
+        </ul>
+      </section>
     </article>
   );
 }
