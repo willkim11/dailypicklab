@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ArticleJsonLd from "@/components/ArticleJsonLd";
+import GuideByline from "@/components/GuideByline";
 
 export const metadata: Metadata = {
   title: "로또 번호 고르는 방법 — 확률, 오해, 책임 있는 이용 가이드",
   description:
     "자동과 수동의 확률 차이, 자주 나오는 번호에 대한 오해, 번호 선택 편향과 책임 있는 복권 이용 기준을 정리했습니다.",
+  alternates: { canonical: "/guides/lotto-winning-tips" },
 };
 
 export default function LottoGuidePage() {
   return (
     <article className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
+      <ArticleJsonLd title="로또 번호 고르는 방법 — 확률, 오해, 책임 있는 이용 가이드" description="자동과 수동의 확률 차이, 자주 나오는 번호에 대한 오해, 번호 선택 편향과 책임 있는 복권 이용 기준을 정리했습니다." path="/guides/lotto-winning-tips" published="2026-05-21" modified="2026-07-24" />
       <div className="mb-2">
         <Link href="/guides" className="text-sm hover:underline" style={{ color: "var(--color-text-muted)" }}>
           ← 가이드 목록
@@ -23,10 +27,7 @@ export default function LottoGuidePage() {
         매주 토요일 밤, 수백만 명이 기대를 품고 TV 앞에 앉습니다. 로또 1등 당첨 확률은 814만분의 1.
         이 확률을 바꿀 수는 없습니다. 그래서 번호 선택은 예측이 아니라 편향을 이해하고, 정해둔 예산 안에서 즐기는 방식으로 접근하는 것이 좋습니다.
       </p>
-      <div className="mt-5 rounded-xl border p-4 text-sm" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)", color: "var(--color-text-muted)" }}>
-        <p>최종 업데이트: 2026년 5월 21일</p>
-        <p className="mt-1">작성 기준: 로또 6/45 조합 수, 독립 시행 원리, 번호 선택 편향, 책임 있는 복권 이용 관점을 기준으로 정리했습니다.</p>
-      </div>
+      <GuideByline published="2026-05-21" modified="2026-07-24" reviewNote="동행복권의 로또 6/45 게임 방식과 공식 당첨 확률을 다시 확인했습니다." />
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
@@ -121,6 +122,13 @@ export default function LottoGuidePage() {
           로또 번호 추첨하기 →
         </Link>
       </div>
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>참고 자료</h2>
+        <ul className="space-y-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+          <li><a href="https://m.dhlottery.co.kr/lt645/intro" target="_blank" rel="noopener noreferrer" className="underline">동행복권, 로또 6/45 게임 방법과 당첨 확률</a></li>
+          <li><a href="https://www.kcgp.or.kr/" target="_blank" rel="noopener noreferrer" className="underline">한국도박문제예방치유원</a></li>
+        </ul>
+      </section>
     </article>
   );
 }

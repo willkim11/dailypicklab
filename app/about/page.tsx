@@ -15,6 +15,7 @@ const tools = [
 ];
 
 const updates = [
+  { date: "2026-07", desc: "반응속도 측정 심화 가이드 3편, Article 구조화 데이터, 작성·검토·출처 표시 추가" },
   { date: "2026-05", desc: "고대비 브랜드 디자인 적용, 가이드 허브 구조화, 성격 유형·로또 확률 콘텐츠 강화" },
   { date: "2026-05", desc: "홈, 소개, 개인정보처리방침, 콘텐츠 작성 기준 정비" },
   { date: "2026-04", desc: "가이드 섹션 신설, 각 툴 페이지 콘텐츠 강화" },
@@ -117,8 +118,8 @@ export default function AboutPage() {
         <div className="space-y-3">
           {[
             { title: "직접 써볼 수 있는 정보", desc: "가이드는 도구 사용법, 체크리스트, 예시처럼 사용자가 바로 적용할 수 있는 내용을 우선합니다." },
-            { title: "출처와 한계 명시", desc: "보안, 확률, 건강 습관처럼 오해가 생길 수 있는 주제는 참고 자료와 한계를 함께 적습니다." },
-            { title: "정기 업데이트", desc: "로또 당첨번호처럼 시간이 지나면 바뀌는 정보는 기준 날짜와 변경 내용을 남깁니다." },
+            { title: "출처와 한계 명시", desc: "공식 기관과 표준 문서를 우선 확인하고, 외부 자료 링크와 브라우저 도구의 한계를 본문에 함께 적습니다." },
+            { title: "작성·검토 이력", desc: "가이드는 Daily Pick Lab 편집팀이 작성하며 최초 게시일, 최근 검토일, 검토 기준을 글 상단에 표시합니다." },
           ].map((item) => (
             <div key={item.title} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
               <p className="font-semibold text-sm" style={{ color: "var(--color-text)" }}>{item.title}</p>
@@ -181,7 +182,7 @@ export default function AboutPage() {
       </section>
 
       <p className="mt-10 text-sm" style={{ color: "var(--color-text-muted)" }}>
-        최종 업데이트: 2026년 5월 21일
+        최종 업데이트: 2026년 7월 24일
       </p>
     </div>
   );

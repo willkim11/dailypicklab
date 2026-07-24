@@ -5,7 +5,7 @@ import ToolCard from "@/components/ToolCard";
 export const metadata: Metadata = {
   title: "Daily Pick Lab — 생활에 바로 쓰는 무료 가이드와 도구",
   description:
-    "비밀번호 보안, 집중 루틴, 반응속도, 성격 유형, 확률 이해까지 생활에 바로 쓰는 무료 가이드와 브라우저 도구 모음.",
+    "반응속도 측정 정확도와 기기 지연을 깊이 있게 설명하고, 비밀번호 보안·집중 루틴 등 생활에 바로 쓰는 무료 도구와 출처 기반 가이드를 제공합니다.",
 };
 
 const tools = [
@@ -43,25 +43,25 @@ const tools = [
 
 const stats = [
   { value: "5", label: "브라우저 도구" },
-  { value: "5+", label: "실용 가이드" },
+  { value: "8", label: "출처 기반 가이드" },
   { value: "0", label: "필수 로그인" },
 ];
 
 const featuredGuides = [
   {
-    href: "/guides/password-security",
-    title: "비밀번호 보안 가이드",
-    description: "강력한 비밀번호, 2단계 인증, 비밀번호 관리자 선택 기준을 정리했습니다.",
+    href: "/guides/reaction-test-accuracy",
+    title: "반응속도 정확도 높이기",
+    description: "준비 측정, 중앙값, 기록 범위로 재현 가능한 기준선을 만드는 방법입니다.",
   },
   {
-    href: "/guides/pomodoro-study",
-    title: "뽀모도로 공부법",
-    description: "집중 루틴을 공부와 업무에 적용하고 실패를 줄이는 방법을 안내합니다.",
+    href: "/guides/reaction-device-latency",
+    title: "60Hz·120Hz와 기기 지연",
+    description: "화면 프레임과 마우스·터치 입력이 기록에 더해지는 과정을 설명합니다.",
   },
   {
-    href: "/guides/reaction-speed",
-    title: "반응속도 향상법",
-    description: "반응속도 측정 오차와 7일 훈련 루틴을 설명합니다.",
+    href: "/guides/reaction-training-log",
+    title: "14일 반응속도 기록법",
+    description: "하루 1세트로 훈련 변화와 컨디션 변동을 구분하는 기록표입니다.",
   },
 ];
 
@@ -98,7 +98,7 @@ export default function Home() {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
-              href="/guides"
+              href="/guides/reaction-speed"
               className="inline-flex h-11 items-center justify-center rounded-md px-6 text-sm font-semibold"
               style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
             >
@@ -177,15 +177,15 @@ export default function Home() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em]">guides</p>
               <h2 className="brand-display mt-4 max-w-2xl text-3xl font-bold leading-tight sm:text-5xl">
-                도구만 던져두지 않고, 판단 기준까지 같이 정리합니다.
+                반응속도 숫자가 달라지는 이유부터 제대로 설명합니다.
               </h2>
             </div>
             <Link
-              href="/guides"
+              href="/guides/reaction-speed"
               className="inline-flex h-11 items-center justify-center rounded-md px-6 text-sm font-semibold"
               style={{ backgroundColor: "var(--color-on-primary)", color: "var(--color-primary)" }}
             >
-              전체 가이드 보기
+              측정 시리즈 보기
             </Link>
           </div>
         </div>
@@ -193,7 +193,7 @@ export default function Home() {
 
       <section className="brand-container mx-auto px-4 pb-20 pt-8 sm:px-6 lg:pb-28">
         <h2 className="brand-display text-3xl font-bold leading-tight" style={{ color: "var(--color-text)" }}>
-          함께 읽으면 좋은 가이드
+          반응속도 기록을 해석하는 순서
         </h2>
         <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
           {featuredGuides.map((guide) => (

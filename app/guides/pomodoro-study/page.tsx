@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ArticleJsonLd from "@/components/ArticleJsonLd";
+import GuideByline from "@/components/GuideByline";
 
 export const metadata: Metadata = {
   title: "뽀모도로 기법 공부법 — 집중 루틴과 과목별 활용 가이드",
   description:
     "수능, 자격증, 독서, 업무에 뽀모도로 기법을 적용하는 방법. 25분/5분, 50분/10분 루틴과 휴식법, 하루 목표 설정법을 정리했습니다.",
+  alternates: { canonical: "/guides/pomodoro-study" },
 };
 
 export default function PomodoroStudyPage() {
   return (
     <article className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
+      <ArticleJsonLd title="뽀모도로 기법 공부법 — 집중 루틴과 과목별 활용 가이드" description="수능, 자격증, 독서, 업무에 뽀모도로 기법을 적용하는 방법. 25분/5분, 50분/10분 루틴과 휴식법, 하루 목표 설정법을 정리했습니다." path="/guides/pomodoro-study" published="2026-05-21" modified="2026-07-24" />
       <div className="mb-2">
         <Link href="/guides" className="text-sm hover:underline" style={{ color: "var(--color-text-muted)" }}>
           ← 가이드 목록
@@ -22,10 +26,7 @@ export default function PomodoroStudyPage() {
       <p className="mt-3 text-lg leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
         책상 앞에 4시간을 앉아 있었지만 실제로 집중한 시간은 40분뿐인 경험이 있으신가요? 뽀모도로 기법은 이 문제를 해결하기 위해 만들어진 시간 관리 방법입니다.
       </p>
-      <div className="mt-5 p-4 rounded-xl border text-sm" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)", color: "var(--color-text-muted)" }}>
-        <p>최종 업데이트: 2026년 5월 21일</p>
-        <p className="mt-1">작성 기준: 실제 학습 루틴에 적용하기 쉽도록 과목별 작업 단위, 휴식 방식, 하루 목표 사이클을 나눠 정리했습니다.</p>
-      </div>
+      <GuideByline published="2026-05-21" modified="2026-07-24" reviewNote="뽀모도로 기법 창안자의 공식 자료와 본문의 실천 절차를 다시 확인했습니다." />
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>
@@ -189,6 +190,13 @@ export default function PomodoroStudyPage() {
           뽀모도로 타이머 시작 →
         </Link>
       </div>
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: "var(--color-text)" }}>참고 자료</h2>
+        <ul className="space-y-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
+          <li><a href="https://www.pomodorotechnique.com/" target="_blank" rel="noopener noreferrer" className="underline">Pomodoro Technique 공식 사이트</a></li>
+          <li><a href="https://www.pomodorotechnique.com/solutions/pomodoro-to-do-today-esheet/" target="_blank" rel="noopener noreferrer" className="underline">Pomodoro Technique, To-Do Today 기록 방식</a></li>
+        </ul>
+      </section>
     </article>
   );
 }

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ArticleJsonLd from "@/components/ArticleJsonLd";
+import GuideByline from "@/components/GuideByline";
 import { ALL_TYPES, TYPE_INFO } from "@/lib/personality";
 
 export const metadata: Metadata = {
   title: "16가지 성격 유형 가이드 — MBTI 축과 활용법",
   description:
     "MBTI 4가지 축의 의미와 16가지 성격 유형을 자기 이해용으로 읽는 방법, 한계와 주의점을 함께 정리한 가이드.",
+  alternates: { canonical: "/guides/mbti-types" },
 };
 
 const groups = [
@@ -18,6 +21,7 @@ const groups = [
 export default function MbtiTypesPage() {
   return (
     <article className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
+      <ArticleJsonLd title="16가지 성격 유형 가이드 — MBTI 축과 활용법" description="MBTI 4가지 축의 의미와 16가지 성격 유형을 자기 이해용으로 읽는 방법, 한계와 주의점을 함께 정리한 가이드." path="/guides/mbti-types" published="2026-05-21" modified="2026-07-24" />
       <div className="mb-2">
         <Link href="/guides" className="text-sm hover:underline" style={{ color: "var(--color-text-muted)" }}>
           ← 가이드 목록
@@ -32,10 +36,7 @@ export default function MbtiTypesPage() {
         사람을 단정하는 검사라기보다 자기 이해를 돕는 언어에 가깝습니다. 4가지 축과 16가지 유형의 의미를
         가볍고 조심스럽게 읽어봅시다.
       </p>
-      <div className="mt-5 p-4 rounded-xl border text-sm" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)", color: "var(--color-text-muted)" }}>
-        <p>최종 업데이트: 2026년 5월 21일</p>
-        <p className="mt-1">작성 기준: MBTI의 4가지 선호 지표와 온라인 성격 유형 테스트의 한계를 함께 반영했습니다.</p>
-      </div>
+      <GuideByline published="2026-05-21" modified="2026-07-24" reviewNote="공식 MBTI 설명과 심리검사의 한계를 다루는 자료 링크를 다시 확인했습니다." />
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold mb-4" style={{ color: "var(--color-text)" }}>

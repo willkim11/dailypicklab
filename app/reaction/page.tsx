@@ -14,27 +14,26 @@ const faqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "스마트폰과 PC 중 어디서 테스트하는 게 더 빠르게 나오나요?",
-      acceptedAnswer: { "@type": "Answer", text: "일반적으로 PC 마우스 클릭이 스마트폰 터치보다 5~15ms 빠르게 측정됩니다. 터치스크린은 클릭 감지 알고리즘이 추가되어 약간의 처리 지연이 있습니다." },
+      name: "스마트폰과 PC 결과를 비교해도 되나요?",
+      acceptedAnswer: { "@type": "Answer", text: "입력 방식, 화면 주사율, 브라우저 처리가 다르므로 직접 비교하기 어렵습니다. 기기별로 기준선을 따로 만들고 각 기기 안에서 변화 추이를 확인하세요." },
     },
     {
       "@type": "Question",
-      name: "반응속도 결과에 오차가 있는 이유는 무엇인가요?",
-      acceptedAnswer: { "@type": "Answer", text: "브라우저 타이머, 화면 주사율, 입력 장치, OS 스케줄링, 무선 마우스 지연 등으로 오차가 생길 수 있습니다. 한 번의 기록보다 같은 환경에서 반복 측정한 평균을 보는 것이 좋습니다." },
+      name: "기록이 매번 다른 이유는 무엇인가요?",
+      acceptedAnswer: { "@type": "Answer", text: "화면 갱신 시점, 입력 장치, 브라우저 상태와 집중 상태가 모두 달라질 수 있습니다. 평균과 중앙값, 최고·최저 기록의 차이를 함께 보세요." },
     },
     {
       "@type": "Question",
-      name: "나이가 들면 반응속도도 느려지나요?",
-      acceptedAnswer: { "@type": "Answer", text: "일반적으로 25세 이후부터 반응속도가 서서히 느려집니다. 하지만 규칙적인 운동과 인지 훈련으로 저하 속도를 크게 늦출 수 있습니다." },
+      name: "한 번의 최고기록을 기준으로 봐도 되나요?",
+      acceptedAnswer: { "@type": "Answer", text: "최고기록은 우연이나 예측 클릭의 영향을 받기 쉽습니다. 같은 환경의 5회 기록과 여러 날의 중앙값을 기준으로 보세요." },
     },
     {
       "@type": "Question",
-      name: "일반인의 평균 반응속도는 얼마인가요?",
-      acceptedAnswer: { "@type": "Answer", text: "일반 성인의 시각 반응속도는 보통 200~250ms 범위로 알려져 있습니다. 기기와 테스트 방식에 따라 차이가 있으므로 절대값보다 자신의 변화 추이를 보는 것이 좋습니다." },
+      name: "이 결과로 건강 상태를 판단할 수 있나요?",
+      acceptedAnswer: { "@type": "Answer", text: "아니요. 이 테스트는 브라우저 기반 참고 도구이며 의료 검사나 인지 기능 평가를 대체하지 않습니다." },
     },
   ],
 };
-
 export default function ReactionPage() {
   return (
     <>

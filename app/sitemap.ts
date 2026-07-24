@@ -3,11 +3,11 @@ import type { MetadataRoute } from "next";
 const BASE_URL = "https://www.dailypicklab.com";
 
 const LAST_MODIFIED = {
-  home: new Date("2026-05-21"),
-  tools: new Date("2026-05-21"),
+  home: new Date("2026-07-24"),
+  tools: new Date("2026-07-24"),
   lotto: new Date("2026-07-04"),
-  guides: new Date("2026-05-21"),
-  policies: new Date("2026-05-21"),
+  guides: new Date("2026-07-24"),
+  policies: new Date("2026-07-24"),
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -22,6 +22,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/guides/password-security`, lastModified: LAST_MODIFIED.guides, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/guides/pomodoro-study`, lastModified: LAST_MODIFIED.guides, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/guides/reaction-speed`, lastModified: LAST_MODIFIED.guides, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/guides/reaction-test-accuracy`, lastModified: LAST_MODIFIED.guides, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/reaction-device-latency`, lastModified: LAST_MODIFIED.guides, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/reaction-training-log`, lastModified: LAST_MODIFIED.guides, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/mbti-types`, lastModified: LAST_MODIFIED.guides, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/guides/lotto-winning-tips`, lastModified: LAST_MODIFIED.guides, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/about`, lastModified: LAST_MODIFIED.policies, changeFrequency: "monthly", priority: 0.5 },

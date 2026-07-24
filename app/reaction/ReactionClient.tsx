@@ -7,21 +7,20 @@ import OtherToolsNav from "@/components/OtherToolsNav";
 type Phase = "idle" | "waiting" | "ready" | "result" | "early";
 
 const TOTAL_ROUNDS = 5;
-const AVERAGE_MS = 250;
 
 function getRating(ms: number): string {
   if (ms < 180) return "번개 같은 반응속도";
   if (ms < 220) return "매우 빠릅니다";
-  if (ms < 260) return "평균보다 빠릅니다";
-  if (ms < 300) return "평균 수준입니다";
+  if (ms < 260) return "안정적인 기록입니다";
+  if (ms < 300) return "조금 더 확인해보세요";
   return "조금 느립니다. 컨디션을 바꿔 다시 측정해보세요";
 }
 
 function getResultAdvice(ms: number): string {
-  if (ms < 180) return "입력 지연이 적은 환경에서 매우 빠르게 반응했습니다. 여러 날 반복 측정해도 비슷하다면 상위권 기록입니다.";
-  if (ms < 220) return "일반적인 시각 반응속도보다 빠른 편입니다. 수면, 카페인, 기기 환경에 따라 10~30ms 정도 달라질 수 있습니다.";
-  if (ms < 260) return "일반 성인 평균 범위에 가깝습니다. 같은 기기에서 아침/저녁 기록을 나눠 보면 컨디션 차이를 확인하기 좋습니다.";
-  if (ms < 300) return "피로, 산만함, 터치 입력 지연의 영향을 받았을 수 있습니다. 손을 따뜻하게 하고 알림을 끈 뒤 다시 측정해보세요.";
+  if (ms < 180) return "이 측정 환경에서 매우 빠른 기록입니다. 예측 클릭이 없었는지 확인하고 여러 날 반복해 재현되는지 보세요.";
+  if (ms < 220) return "빠른 기록입니다. 기기나 주사율을 바꾸지 않은 상태에서 중앙값과 기록 범위를 함께 비교하세요.";
+  if (ms < 260) return "안정적인 참고 구간입니다. 같은 기기에서 아침과 저녁 기록을 나눠 보면 컨디션 차이를 확인하기 좋습니다.";
+  if (ms < 300) return "피로, 산만함, 입력 장치 지연의 영향을 함께 확인하세요. 알림을 끄고 같은 조건에서 다시 측정해보세요.";
   return "수면 부족, 피로, 입력 장치 지연 가능성이 있습니다. 한 번의 결과로 판단하지 말고 같은 환경에서 3세트 이상 평균을 비교하세요.";
 }
 
@@ -106,6 +105,9 @@ export default function ReactionClient() {
   const avg = times.length
     ? Math.round(times.reduce((a, b) => a + b, 0) / times.length)
     : null;
+  const sortedTimes = [...times].sort((a, b) => a - b);
+  const median = sortedTimes.length ? sortedTimes[Math.floor(sortedTimes.length / 2)] : null;
+  const spread = sortedTimes.length > 1 ? sortedTimes[sortedTimes.length - 1] - sortedTimes[0] : null;
 
   const style = PHASE_STYLE[phase];
 
@@ -187,14 +189,18 @@ export default function ReactionClient() {
           style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}
           aria-live="polite"
         >
-          <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="grid grid-cols-2 gap-4 text-center sm:grid-cols-4">
             <div>
               <p className="text-2xl font-bold" style={{ color: "var(--color-primary)" }}>{avg}ms</p>
               <p className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>내 평균</p>
             </div>
             <div>
-              <p className="text-2xl font-bold" style={{ color: "var(--color-text-muted)" }}>{AVERAGE_MS}ms</p>
-              <p className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>일반 평균</p>
+              <p className="text-2xl font-bold" style={{ color: "var(--color-text)" }}>{median !== null ? `${median}ms` : "-"}</p>
+              <p className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>중앙값</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold" style={{ color: "var(--color-text-muted)" }}>{spread !== null ? `${spread}ms` : "-"}</p>
+              <p className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>기록 범위</p>
             </div>
             <div>
               <p className="text-2xl font-bold" style={{ color: "var(--color-success)" }}>
@@ -238,12 +244,12 @@ export default function ReactionClient() {
         </h2>
         <p>
           반응속도(반응시간, Reaction Time)는 시각·청각 자극을 인지하고 행동으로 옮기는 데 걸리는 시간입니다.
-          일반 성인의 평균 시각 반응속도는 약 200~250ms(0.2~0.25초)입니다.
-          뇌에서 자극을 처리하고 근육에 신호를 보내는 과정 전체가 이 시간 안에 일어납니다.
+          이 페이지의 값에는 사람이 자극을 처리하고 손을 움직이는 시간뿐 아니라 화면 표시와 입력 장치의 지연도 포함됩니다.
+          따라서 다른 사이트나 전문 장비의 결과와 숫자를 그대로 비교하기보다 같은 환경에서 얻은 기록을 비교해야 합니다.
         </p>
         <p className="mt-3">
-          반응속도는 수면의 질, 카페인 섭취 여부, 집중력, 피로도, 연습량에 따라 크게 달라집니다.
-          격투기 선수나 e스포츠 프로게이머는 지속적인 훈련을 통해 150ms 이하의 반응속도를 보이기도 합니다.
+          반응시간은 수면, 집중 상태, 피로, 테스트 숙련도에 따라 달라질 수 있습니다.
+          기기나 입력 방식을 바꾸면 새 기준선을 만들고, 한 번의 최고기록보다 여러 날의 중앙값과 변동 폭을 확인하세요.
         </p>
 
         <div className="mt-5 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
@@ -270,9 +276,9 @@ export default function ReactionClient() {
             </thead>
             <tbody>
               {[
-                { range: "~ 180ms", grade: "매우 빠름", level: "입력 지연이 적은 환경에서 상위권 기록" },
-                { range: "181 ~ 220ms", grade: "빠름", level: "일반 평균보다 빠른 편" },
-                { range: "221 ~ 260ms", grade: "평균권", level: "일반 성인 다수가 이 범위" },
+                { range: "~ 180ms", grade: "매우 빠름", level: "예측 클릭 여부와 반복 재현 확인" },
+                { range: "181 ~ 220ms", grade: "빠름", level: "여러 날 반복해 재현 여부 확인" },
+                { range: "221 ~ 260ms", grade: "참고 구간", level: "같은 환경의 중앙값과 함께 확인" },
                 { range: "261 ~ 300ms", grade: "조금 느림", level: "피로, 산만함, 기기 지연 가능" },
                 { range: "301ms ~", grade: "느림", level: "컨디션이나 환경을 바꿔 재측정 권장" },
               ].map((row) => (
@@ -309,10 +315,10 @@ export default function ReactionClient() {
         </h3>
         <div className="space-y-3">
           {[
-            { title: "충분한 수면", desc: "수면 부족은 반응속도를 최대 30% 저하시킵니다. 성인 기준 7~9시간의 수면이 권장됩니다." },
-            { title: "규칙적인 운동", desc: "유산소 운동은 뇌 혈류를 개선하고 신경 전달 속도를 높입니다. 줄넘기, 배드민턴 같은 순발력 운동이 특히 효과적입니다." },
-            { title: "반응 훈련 게임", desc: "이 테스트처럼 반복적인 시각 자극 반응 훈련은 뇌와 근육 사이의 신경 연결을 강화합니다." },
-            { title: "집중력 유지", desc: "테스트 직전 2~3번 심호흡을 하면 집중력이 높아져 더 빠른 반응이 가능합니다." },
+            { title: "수면 조건 기록", desc: "수면 부족과 피로는 주의력과 반응에 영향을 줄 수 있습니다. 수면 시간을 함께 적어 결과 변화와 비교하세요." },
+            { title: "무리하지 않는 반복", desc: "짧은 세트를 같은 조건에서 반복하고 손목이나 눈이 피로해지기 전에 멈추세요." },
+            { title: "정확성 우선", desc: "초록색을 확인한 뒤 누르고, 예측 클릭 횟수도 함께 기록해야 빠르면서 정확한 변화를 볼 수 있습니다." },
+            { title: "환경 고정", desc: "같은 화면 주사율, 브라우저, 입력 장치를 유지하고 백그라운드 작업과 알림을 정리하세요." },
           ].map((item) => (
             <div key={item.title} className="flex gap-3 p-4 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
               <span style={{ color: "var(--color-success)" }} className="mt-0.5">✓</span>
@@ -330,10 +336,10 @@ export default function ReactionClient() {
         </h3>
         <div className="space-y-4">
           {[
-            { q: "스마트폰과 PC 중 어디서 테스트하는 게 더 빠르게 나오나요?", a: "일반적으로 PC 마우스 클릭이 스마트폰 터치보다 5~15ms 빠르게 측정됩니다. 터치스크린은 클릭 감지 알고리즘이 추가되어 약간의 처리 지연이 있습니다." },
-            { q: "결과에 ±50ms 오차가 있다고 하는데 왜 그런가요?", a: "브라우저의 JavaScript 타이머 정밀도, 화면 주사율(60Hz/120Hz), OS 스케줄링 등의 요인으로 오차가 발생합니다. 이 테스트는 절대적인 수치보다 자신의 상태 변화를 모니터링하는 용도로 활용하세요." },
-            { q: "나이가 들면 반응속도도 느려지나요?", a: "네, 일반적으로 25세 이후부터 반응속도가 서서히 느려집니다. 하지만 규칙적인 운동과 인지 훈련으로 저하 속도를 크게 늦출 수 있습니다." },
-            { q: "커피를 마시면 반응속도가 빨라지나요?", a: "카페인은 중추신경계를 자극해 단기적으로 반응속도를 5~10ms 향상시킬 수 있습니다. 하지만 과다 섭취 시 오히려 불안과 집중력 저하로 역효과가 날 수 있습니다." },
+            { q: "스마트폰과 PC 결과를 비교해도 되나요?", a: "입력 방식, 화면 주사율, 브라우저 처리가 다르므로 직접 비교하기 어렵습니다. 기기별로 기준선을 따로 만들고 각 기기 안에서 변화 추이를 확인하세요." },
+            { q: "기록이 매번 다른 이유는 무엇인가요?", a: "화면 갱신 시점, 입력 장치, 브라우저 상태와 집중 상태가 모두 달라질 수 있습니다. 평균과 중앙값, 최고·최저 기록의 차이를 함께 보세요." },
+            { q: "한 번의 최고기록을 기준으로 봐도 되나요?", a: "최고기록은 우연이나 예측 클릭의 영향을 받기 쉽습니다. 같은 환경의 5회 기록과 여러 날의 중앙값을 기준으로 보세요." },
+            { q: "이 결과로 건강 상태를 판단할 수 있나요?", a: "아니요. 이 테스트는 브라우저 기반 참고 도구이며 의료 검사나 인지 기능 평가를 대체하지 않습니다." },
           ].map((item) => (
             <div key={item.q} className="p-4 rounded-xl border" style={{ borderColor: "var(--color-border)" }}>
               <p className="font-semibold" style={{ color: "var(--color-text)" }}>Q. {item.q}</p>
@@ -345,14 +351,14 @@ export default function ReactionClient() {
         <div className="mt-8 p-5 rounded-xl border" style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-bg-subtle)" }}>
           <p className="font-semibold mb-2" style={{ color: "var(--color-text)" }}>더 자세히 읽기</p>
           <p className="text-sm mb-4">
-            반응속도에 영향을 주는 요인과 훈련 루틴을 가이드에서 더 자세히 확인하세요.
+            정확한 측정 절차, 기기 지연, 14일 기록법을 주제별 가이드에서 확인하세요.
           </p>
           <Link
             href="/guides/reaction-speed"
             className="inline-block px-5 py-3 rounded-lg font-semibold text-sm"
             style={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
           >
-            반응속도 향상 가이드 보기 →
+            반응속도 가이드 시리즈 보기 →
           </Link>
         </div>
       </section>
