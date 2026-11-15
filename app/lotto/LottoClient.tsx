@@ -66,7 +66,23 @@ const INITIAL_RECENT_RESULT_COUNT = 3;
 const RECENT_RESULTS_PAGE_SIZE = 5;
 
 // 지난 회차 당첨번호
+// 회차별 기록 교차 확인: https://lottohanjang.com/results/ · https://lotto.rodamemo.com/draws.php
+// 1250회 동행복권 발표 보도: https://www.yna.co.kr/view/AKR20261114047000002
 const RECENT_RESULTS = [
+  { round: 1250, date: "2026-11-14", numbers: [1, 5, 18, 23, 27, 28], bonus: 8 },
+  { round: 1249, date: "2026-11-07", numbers: [2, 11, 16, 25, 34, 35], bonus: 14 },
+  { round: 1248, date: "2026-10-31", numbers: [16, 18, 27, 36, 38, 42], bonus: 22 },
+  { round: 1247, date: "2026-10-24", numbers: [8, 14, 21, 22, 42, 45], bonus: 24 },
+  { round: 1246, date: "2026-10-17", numbers: [16, 22, 23, 24, 27, 28], bonus: 6 },
+  { round: 1245, date: "2026-10-10", numbers: [4, 5, 25, 28, 32, 42], bonus: 12 },
+  { round: 1244, date: "2026-10-03", numbers: [1, 13, 18, 26, 34, 38], bonus: 25 },
+  { round: 1243, date: "2026-09-26", numbers: [9, 18, 24, 38, 43, 44], bonus: 35 },
+  { round: 1242, date: "2026-09-19", numbers: [2, 4, 10, 16, 31, 41], bonus: 9 },
+  { round: 1241, date: "2026-09-12", numbers: [7, 13, 16, 23, 24, 43], bonus: 9 },
+  { round: 1240, date: "2026-09-05", numbers: [11, 13, 19, 20, 31, 44], bonus: 27 },
+  { round: 1239, date: "2026-08-29", numbers: [11, 13, 22, 32, 33, 36], bonus: 8 },
+  { round: 1238, date: "2026-08-22", numbers: [2, 13, 18, 32, 38, 42], bonus: 22 },
+  { round: 1237, date: "2026-08-15", numbers: [10, 20, 23, 34, 37, 40], bonus: 36 },
   { round: 1236, date: "2026-08-08", numbers: [12, 18, 21, 29, 34, 38], bonus: 10 },
   { round: 1235, date: "2026-08-01", numbers: [6, 7, 11, 15, 39, 43], bonus: 20 },
   { round: 1234, date: "2026-07-25", numbers: [1, 15, 19, 31, 35, 43], bonus: 27 },
