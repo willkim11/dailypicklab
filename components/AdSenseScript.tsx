@@ -1,6 +1,5 @@
 "use client";
 
-import Script from "next/script";
 import { usePathname } from "next/navigation";
 
 const ADSENSE_CLIENT = "ca-pub-2678965337292925";
@@ -26,10 +25,9 @@ export default function AdSenseScript() {
   }
 
   return (
-    <Script
+    <script
       id="adsense-script"
       async
-      strategy="afterInteractive"
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
       crossOrigin="anonymous"
     />
