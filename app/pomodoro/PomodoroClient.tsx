@@ -36,6 +36,15 @@ export default function PomodoroClient() {
   const [remaining, setRemaining] = useState(getPreset("classic").focus * 60);
   const [cycles, setCycles] = useState(0);
   const [notifGranted, setNotifGranted] = useState(false);
+  const [notifSupported, setNotifSupported] = useState(false);
+
+  // 서버와 첫 클라이언트 렌더를 일치시킨 뒤 브라우저 알림 상태를 확인합니다.
+  useEffect(() => {
+    if ("Notification" in window) {
+      setNotifSupported(true);
+      setNotifGranted(Notification.permission === "granted");
+    }
+  }, []);
 
   const startTimeRef = useRef<number>(0);
   const startRemainingRef = useRef<number>(getPreset("classic").focus * 60);
@@ -315,7 +324,7 @@ export default function PomodoroClient() {
         </div>
 
         {/* 알림 권한 버튼 */}
-        {!notifGranted && typeof window !== "undefined" && "Notification" in window && Notification.permission !== "granted" && (
+        {notifSupported && !notifGranted && (
           <button
             onClick={requestNotification}
             className="mt-4 text-sm underline"
