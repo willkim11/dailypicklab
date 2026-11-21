@@ -68,7 +68,9 @@ const RECENT_RESULTS_PAGE_SIZE = 5;
 // 지난 회차 당첨번호
 // 회차별 기록 교차 확인: https://lottohanjang.com/results/ · https://lotto.rodamemo.com/draws.php
 // 1250회 동행복권 발표 보도: https://www.yna.co.kr/view/AKR20261114047000002
+// 1251회 결과 교차 확인: https://www.specialtimes.co.kr/news/articleView.html?idxno=488600 · https://lottis.kr/lotto/1251
 const RECENT_RESULTS = [
+  { round: 1251, date: "2026-11-21", numbers: [14, 18, 19, 29, 40, 45], bonus: 1 },
   { round: 1250, date: "2026-11-14", numbers: [1, 5, 18, 23, 27, 28], bonus: 8 },
   { round: 1249, date: "2026-11-07", numbers: [2, 11, 16, 25, 34, 35], bonus: 14 },
   { round: 1248, date: "2026-10-31", numbers: [16, 18, 27, 36, 38, 42], bonus: 22 },

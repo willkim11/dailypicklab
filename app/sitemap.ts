@@ -5,7 +5,7 @@ const BASE_URL = "https://www.dailypicklab.com";
 const LAST_MODIFIED = {
   home: new Date("2026-07-24"),
   tools: new Date("2026-07-24"),
-  lotto: new Date("2026-11-15"),
+  lotto: new Date("2026-11-21"),
   guides: new Date("2026-07-24"),
   policies: new Date("2026-07-24"),
 };
